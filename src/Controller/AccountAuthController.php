@@ -27,4 +27,13 @@ class AccountAuthController extends  AbstractController
     {
         return $this->render('register.html.twig');
     }
+
+    /**
+     * @Route("/forget_password",name="forget_password_page")
+     * @return Response
+     */
+    public function forgetPasswordAction()
+    {
+        return $this->render('forget_password.html.twig');
+    }
 }
