@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LoginController extends  AbstractController
+class AccountAuthController extends  AbstractController
 {
     /**
      * @Route("/login",name="login_page")
@@ -17,5 +17,14 @@ class LoginController extends  AbstractController
     public function loginAction()
     {
         return $this->render('login.html.twig');
+    }
+
+    /**
+     * @Route("/register",name="register_page")
+     * @return Response
+     */
+    public function registerAction()
+    {
+        return $this->render('register.html.twig');
     }
 }
