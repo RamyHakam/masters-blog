@@ -23,17 +23,18 @@
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    {% include 'new_post.html.twig' %}
+                    <div class="row">
+                        {{ post.post("POST") }}
+                    </div>
+                </div>
+            </section>
         </div>
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-            </div>
-        </section>
-        {% include 'new_post.html.twig' %}
-        <div class="row">
-            {{ post.post("POST") }}
-            </div>
-        </div>
+
+     </div>
     </body>
 {% endblock %}
 

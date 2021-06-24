@@ -24,31 +24,14 @@
         {#{{ encore_entry_script_tags('app') }}#}
 
         <!-- jQuery -->
-        <script src="plugins/jquery-knob/{{ asset('plugins/jquery/jquery.min.js') }}" defer></script>
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}" defer></script>
         <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}" defer></script>
         <!-- Bootstrap 4 -->
         <script src="{{ asset('plugins/bs-stepper/js/bs-stepper.min.js') }}" defer></script>
 
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
         <!-- AdminLTE App -->
-        <script src="{{ asset('dist/js/adminlte.min.js') }}" defer></script>
-        <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}" defer></script>
-        <script>
-            // "myAwesomeDropzone" is the camelized version of the HTML element's ID
-            Dropzone.options.myAwesomeDropzone = {
-                paramName: "file", // The name that will be used to transfer the file
-                maxFilesize: 2, // MB
-                thumbnailWidth: null,
-                thumbnailHeight: null,
-                accept: function (file, done) {
-                    if (file.name == "justinbieber.jpg") {
-                        done("Naha, you don't.");
-                    } else {
-                        done();
-                    }
-                }
-            };
-        </script>
+        <script src="{{ asset('dist/js/adminlte.min.js') }}" defer></script
     {% endblock %}
 </head>
 
