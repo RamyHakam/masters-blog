@@ -2,7 +2,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a class="brand-link" href="../index3.html">
+        <a class="brand-link" href="{{ path('home_page') }}">
             <img alt="AdminLTE Logo" class="brand-image img-circle elevation-3" src="{{ asset('dist/img/AdminLTELogo.png') }}"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Masters Blog</span>
@@ -23,7 +23,7 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="home.html">
+                        <a class="nav-link active" href="{{ path('home_page') }}">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Home
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="notification.html">
+                        <a class="nav-link" href="{{ path('notification_page') }}">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Notification

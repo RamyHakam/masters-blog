@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}  - Notifications
+{% endblock %}
+
+
+{% block body %}
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'navbar.html.twig' %}
+        {% include 'sideMenu.html.twig' %}
+        <!-- Content Wrapper. Contains page content -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-12">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h3 class="card-title">Notifications</h3>
+                                    <!-- /.card-tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body p-0">
+                                </div>
+                                <div class="table-responsive mailbox-messages">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        <tr>
+
+                                            <td class="mailbox-star user-panel">
+                                                <div class="img">
+                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ asset('dist/img/avatar.png') }}">
+                                                </div>
+                                            </td>
+
+                                            <td class="mailbox-name text-center"><a href="profile_view.html"> <b>Alexander Pierce</b> Start Following You</a></td></td>
+                                            <td class="mailbox-date">5 mins ago</td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td class="mailbox-star user-panel">
+                                                <div class="img">
+                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ asset('dist/img/avatar.png') }}">
+                                                </div>
+                                            </td>
+
+                                            <td class="mailbox-name text-center"><a href="single_post.html"> <b>Alexander Pierce</b> Comment in your post</a></td></td>
+                                            <td class="mailbox-date">2 days ago</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td class="mailbox-star user-panel">
+                                                <div class="img">
+                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ asset('dist/img/avatar.png') }}">
+                                                </div>
+                                            </td>
+
+                                            <td class="mailbox-name text-center"><a href="profile_view.html"> <b>Ahmed Mohamed</b> Start Following You</a></td></td>
+                                            <td class="mailbox-date">5 days ago</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- /.table -->
+                                </div>
+                                <!-- /.mail-box-messages -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer p-0">
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+         {% include 'footer.html.twig' %}
+    </div>
+    </body>
+{% endblock %}
