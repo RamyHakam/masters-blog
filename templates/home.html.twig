@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% import 'Macros/post.twig' as post %}
+
+{% block title %}
+    {{ parent() }}  - Home
+{% endblock %}
+
+
+{% block body %}
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'navbar.html.twig' %}
+        {% include 'sideMenu.html.twig' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-12 text-center">
+                            <h2 class="mt-4 mb-4"> Master Blog All Members Posts.</h2>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+        </div>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+            </div>
+        </section>
+        {% include 'new_post.html.twig' %}
+        <div class="row">
+            {{ post.post("POST") }}
+            </div>
+        </div>
+    </body>
+{% endblock %}
+

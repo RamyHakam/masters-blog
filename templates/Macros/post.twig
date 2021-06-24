@@ -1,0 +1,81 @@
+{% macro post(POST) %}
+    <div class="post">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Box Comment -->
+                <div class="card card-widget">
+                    <div class="card-header">
+                        <div class=" col-md-11 user-block">
+                            <img alt="User Image" class="img-circle" src={{ asset('dist/img/user3-128x128.jpg') }}>
+                            <span class="username"><a href="#">Elizabeth Pierce.</a></span>
+                            <span class="description">Shared publicly - 7:30 PM Today</span>
+                        </div>
+                        <div class=" col-md-1 card-tools d-flex justify-content-end">
+                            <button class="btn btn-tool" data-card-widget="remove" type="button">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <p>I took this photo this morning. What do you guys think?</p>
+                        <img alt="Photo" class="img-fluid pad" src="{{ asset('dist/img/photo2.png') }}"
+                             style="margin-bottom: 1rem;">
+                        <button class="btn btn-default btn-sm" type="button"><i class="far fa-thumbs-up"></i> Like
+                        </button>
+                        <button class="btn btn-danger btn-sm" type="button"><i class="far fa-trash-alt"></i> Remove
+                        </button>
+                        <span class="float-right text-muted">127 likes - 3 comments</span>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer card-comments">
+                        <div class="card-comment">
+                            <!-- User image -->
+                            <img alt="User Image" class="img-circle img-sm" src="{{ asset('dist/img/user3-128x128.jpg') }}">
+
+                            <div class="comment-text">
+                    <span class="username">
+                      Elizabeth Pierce
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                It is a long established fact that a reader will be distracted
+                                by the readable content of a page when looking at its layout.
+                            </div>
+                            <!-- /.comment-text -->
+                        </div>
+                        <!-- /.card-comment -->
+                        <div class="card-comment">
+                            <!-- User image -->
+                            <img alt="User Image" class="img-circle img-sm" src="{{ asset('dist/img/user4-128x128.jpg') }}">
+
+                            <div class="comment-text">
+                    <span class="username">
+                      Luna Stark
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                It is a long established fact that a reader will be distracted
+                                by the readable content of a page when looking at its layout.
+                            </div>
+                            <!-- /.comment-text -->
+                        </div>
+                        <!-- /.card-comment -->
+                    </div>
+                    <!-- /.card-footer -->
+                    <div class="card-footer">
+                        <form action="#" method="post">
+                            <img alt="Alt Text" class="img-fluid img-circle img-sm" src="{{ asset('dist/img/user4-128x128.jpg') }}">
+                            <!-- .img-push is used to add margin to elements next to floating images -->
+                            <div class="img-push">
+                                <input class="form-control form-control-sm" placeholder="Press enter to post comment"
+                                       type="text">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+    </div>
+{% endmacro %}

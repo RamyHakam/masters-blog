@@ -9,12 +9,12 @@
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../index2.html" class="h1"><b>Masters</b>Blog</a>
+                <a href="{{ path('home_page') }}" class="h1"><b>Masters</b>Blog</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register a new membership</p>
 
-                <form action="../index.html" method="post">
+                <form action="{{ path('home_page') }}" method="post">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Full name">
                         <div class="input-group-append">

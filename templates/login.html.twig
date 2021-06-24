@@ -10,12 +10,12 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="home.html" class="h1"><b>Masters</b>Blog</a>
+                <a href="{{ path('home_page') }}" class="h1"><b>Masters</b>Blog</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="home.html" method="post">
+                <form action="{{ path('home_page') }}" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
