@@ -14,8 +14,17 @@ class AccountController extends  AbstractController
      * @Route("/profile",name="profile_page")
      * @return Response
      */
-    public function viewProfile()
+    public function getProfile()
     {
       return  $this->render('profile.html.twig');
+    }
+
+    /**
+     * @Route("/profile/{id}",name="profile_page_view")
+     * @return Response
+     */
+    public function viewProfile(int $id)
+    {
+        return  $this->render('profile_view.html.twig',['id' => $id]);
     }
 }
