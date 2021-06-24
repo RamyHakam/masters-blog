@@ -1,0 +1,624 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}  - Profile
+{% endblock %}
+
+
+{% block body %}
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'navbar.html.twig' %}
+        {% include 'sideMenu.html.twig' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-md-12">
+                            <!-- Widget: user widget style 1 -->
+                            <div class="card card-widget widget-user">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header text-white"
+                                     style="background: url('../dist/img/photo1.png') center center;">
+                                    <h3 class="widget-user-username text-center">Elizabeth Pierce</h3>
+                                    <h5 class="widget-user-desc text-center">Web Designer</h5>
+                                </div>
+                                <div class="widget-user-image">
+                                    <img class="img-circle" src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                         alt="User Avatar">
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <ul class="nav nav-pills">
+                                                        <li class="col-sm-4">
+                                                            <a class="nav-link active" href="#activity"
+                                                               data-toggle="tab">
+                                                                <div class=" border-right">
+                                                                    <div class="description-block">
+                                                                        <h5 class="description-header">3,200</h5>
+                                                                        <span class="description-text">Posts</span>
+                                                                    </div>
+                                                                    <!-- /.description-block -->
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="col-sm-4">
+                                                            <a class="nav-link" href="#timeline" data-toggle="tab">
+                                                                <div class="border-right">
+                                                                    <div class="description-block">
+                                                                        <h5 class="description-header">13,000</h5>
+                                                                        <span class="description-text">FOLLOWERS</span>
+                                                                    </div>
+                                                                    <!-- /.description-block -->
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <li class="col-sm-4">
+                                                            <a class="nav-link" href="#settings" data-toggle="tab">
+                                                                <div class=" border-right">
+                                                                    <div class="description-block">
+                                                                        <h5 class="description-header"><span
+                                                                                    class="fas fa-file-contract"></span>
+                                                                        </h5>
+                                                                        <span class="description-text">Settings</span>
+                                                                    </div>
+                                                                    <!-- /.description-block -->
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </div>
+                            </div>
+                            <!-- /.widget-user -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </div><!-- /.container-fluid -->
+
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+
+                                <div class="post">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!-- Box Comment -->
+                                            <div class="card card-widget">
+                                                <div class="card-header">
+                                                    <div class=" col-md-11 user-block">
+                                                        <img class="img-circle"
+                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             alt="User Image">
+                                                        <span class="username"><a href="#">Elizabeth Pierce.</a></span>
+                                                        <span class="description">Shared publicly - 7:30 PM Today</span>
+                                                    </div>
+                                                    <div class=" col-md-1 card-tools d-flex justify-content-end">
+                                                        <button type="button" class="btn btn-tool"
+                                                                data-card-widget="collapse">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-tool"
+                                                                data-card-widget="remove">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-header -->
+                                                <div class="card-body">
+                                                    <p>I took this photo this morning. What do you guys think?</p>
+                                                    <img class="img-fluid pad" style="margin-bottom: 1rem;"
+                                                         src="../dist/img/photo2.png"
+                                                         alt="Photo">
+                                                    <button type="button" class="btn btn-default btn-sm"><i
+                                                                class="far fa-thumbs-up"></i> Like
+                                                    </button>
+                                                    <span class="float-right text-muted">127 likes - 3 comments</span>
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="card-footer card-comments">
+                                                    <div class="card-comment">
+                                                        <!-- User image -->
+                                                        <img class="img-circle img-sm"
+                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             alt="User Image">
+
+                                                        <div class="comment-text">
+                    <span class="username">
+                      Elizabeth Pierce
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                                            It is a long established fact that a reader will be
+                                                            distracted
+                                                            by the readable content of a page when looking at its
+                                                            layout.
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.card-comment -->
+                                                    <div class="card-comment">
+                                                        <!-- User image -->
+                                                        <img class="img-circle img-sm"
+                                                             src="../dist/img/user4-128x128.jpg" alt="User Image">
+
+                                                        <div class="comment-text">
+                    <span class="username">
+                      Luna Stark
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                                            It is a long established fact that a reader will be
+                                                            distracted
+                                                            by the readable content of a page when looking at its
+                                                            layout.
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.card-comment -->
+                                                </div>
+                                                <!-- /.card-footer -->
+                                                <div class="card-footer">
+                                                    <form action="#" method="post">
+                                                        <img class="img-fluid img-circle img-sm"
+                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             alt="Alt Text">
+                                                        <!-- .img-push is used to add margin to elements next to floating images -->
+                                                        <div class="img-push">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                   placeholder="Press enter to post comment">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.card-footer -->
+                                            </div>
+                                            <!-- /.card -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="post">
+
+                                    <div class="row">
+                                        <!-- /.col -->
+                                        <div class="col-md-12">
+                                            <!-- Box Comment -->
+                                            <div class="card card-widget">
+                                                <div class="card-header">
+                                                    <div class=" col-md-11 user-block">
+                                                        <img class="img-circle"
+                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             alt="User Image">
+                                                        <span class="username"><a href="#">Elizabeth Pierce.</a></span>
+                                                        <span class="description">Shared publicly - 7:30 PM Today</span>
+                                                    </div>
+                                                    <div class=" col-md-1 card-tools d-flex justify-content-end">
+                                                        <button type="button" class="btn btn-tool"
+                                                                data-card-widget="collapse">
+                                                            <i class="fas fa-minus"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-tool"
+                                                                data-card-widget="remove">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <!-- /.card-header -->
+                                                <div class="card-body">
+                                                    <!-- post text -->
+                                                    <p>Far far away, behind the word mountains, far from the
+                                                        countries Vokalia and Consonantia, there live the blind
+                                                        texts. Separated they live in Bookmarksgrove right at</p>
+
+                                                    <p>the coast of the Semantics, a large language ocean.
+                                                        A small river named Duden flows by their place and supplies
+                                                        it with the necessary regelialia. It is a paradisematic
+                                                        country, in which roasted parts of sentences fly into
+                                                        your mouth.</p>
+
+                                                    <button type="button" class="btn btn-default btn-sm"><i
+                                                                class="far fa-thumbs-up"></i> Like
+                                                    </button>
+                                                    <span class="float-right text-muted">45 likes - 2 comments</span>
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="card-footer card-comments">
+                                                    <div class="card-comment">
+                                                        <!-- User image -->
+                                                        <img class="img-circle img-sm"
+                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             alt="User Image">
+
+                                                        <div class="comment-text">
+                    <span class="username">
+                      Maria Gonzales
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                                            It is a long established fact that a reader will be
+                                                            distracted
+                                                            by the readable content of a page when looking at its
+                                                            layout.
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.card-comment -->
+                                                    <div class="card-comment">
+                                                        <!-- User image -->
+                                                        <img class="img-circle img-sm"
+                                                             src="{{ asset('dist/img/user5-128x128.jpg') }}"
+                                                             alt="User Image">
+
+                                                        <div class="comment-text">
+                    <span class="username">
+                      Nora Havisham
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                                            The point of using Lorem Ipsum is that it hrs a morer-less
+                                                            normal distribution of letters, as opposed to using
+                                                            'Content here, content here', making it look like readable
+                                                            English.
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.card-comment -->
+                                                </div>
+                                                <!-- /.card-footer -->
+                                                <div class="card-footer">
+                                                    <form action="#" method="post">
+                                                        <img class="img-fluid img-circle img-sm"
+                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             alt="Alt Text">
+                                                        <!-- .img-push is used to add margin to elements next to floating images -->
+                                                        <div class="img-push">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                   placeholder="Press enter to post comment">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.card-footer -->
+                                            </div>
+                                            <!-- /.card -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="timeline">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-header text-muted border-bottom-0">
+                                                Digital Strategist
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="h6"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-building"></i></span>
+                                                                Address:
+                                                                Demo Street 123, Demo City 04312, NJ
+                                                            </li>
+                                                            <li class="small"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-phone"></i></span> Phone
+                                                                #: +
+                                                                800 - 12 12 23 52
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-5 text-center">
+                                                        <img src="{{ asset('/dist/img/user2-160x160.jpg') }}"
+                                                             alt="user-avatar" class="img-circle img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer row">
+                                                <div class="col-md-6 text-left">
+                                                    <a href="#" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-plus"></i> Follow
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <a href="#" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-user"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-header text-muted border-bottom-0">
+                                                Digital Strategist
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="h6"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-building"></i></span>
+                                                                Address:
+                                                                Demo Street 123, Demo City 04312, NJ
+                                                            </li>
+                                                            <li class="small"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-phone"></i></span> Phone
+                                                                #: +
+                                                                800 - 12 12 23 52
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-5 text-center">
+                                                        <img src="{{ asset('/dist/img/user2-160x160.jpg') }}"
+                                                             alt="user-avatar" class="img-circle img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer row">
+                                                <div class="col-md-6 text-left">
+                                                    <a href="#" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-plus"></i> Follow
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <a href="#" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-user"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-header text-muted border-bottom-0">
+                                                Digital Strategist
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="h6"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-building"></i></span>
+                                                                Address:
+                                                                Demo Street 123, Demo City 04312, NJ
+                                                            </li>
+                                                            <li class="small"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-phone"></i></span> Phone
+                                                                #: +
+                                                                800 - 12 12 23 52
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-5 text-center">
+                                                        <img src="{{ asset('/dist/img/user2-160x160.jpg') }}"
+                                                             alt="user-avatar" class="img-circle img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer row">
+                                                <div class="col-md-6 text-left">
+                                                    <a href="#" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-plus"></i> Follow
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <a href="profile_view.html" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-user"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-header text-muted border-bottom-0">
+                                                Digital Strategist
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="h6"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-building"></i></span>
+                                                                Address:
+                                                                Demo Street 123, Demo City 04312, NJ
+                                                            </li>
+                                                            <li class="small"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-phone"></i></span> Phone
+                                                                #: +
+                                                                800 - 12 12 23 52
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-5 text-center">
+                                                        <img src="{{ asset('/dist/img/user2-160x160.jpg') }}"
+                                                             alt="user-avatar" class="img-circle img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer row">
+                                                <div class="col-md-6 text-left">
+                                                    <a href="#" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-plus"></i> Follow
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <a href="profile_view.html" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-user"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-header text-muted border-bottom-0">
+                                                Digital Strategist
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="h6"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-building"></i></span>
+                                                                Address:
+                                                                Demo Street 123, Demo City 04312, NJ
+                                                            </li>
+                                                            <li class="small"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-phone"></i></span> Phone
+                                                                #: +
+                                                                800 - 12 12 23 52
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-5 text-center">
+                                                        <img src="{{ asset('/dist/img/user2-160x160.jpg') }}"
+                                                             alt="user-avatar" class="img-circle img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer row">
+                                                <div class="col-md-6 text-left">
+                                                    <a href="#" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-plus"></i> Follow
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <a href="profile_view.html" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-user"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                        <div class="card bg-light d-flex flex-fill">
+                                            <div class="card-header text-muted border-bottom-0">
+                                                Digital Strategist
+                                            </div>
+                                            <div class="card-body pt-0">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <h2 class="lead"><b>Nicole Pearson</b></h2>
+                                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                            <li class="h6"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-building"></i></span>
+                                                                Address:
+                                                                Demo Street 123, Demo City 04312, NJ
+                                                            </li>
+                                                            <li class="small"><span class="fa-li"><i
+                                                                            class="fas fa-lg fa-phone"></i></span> Phone
+                                                                #: +
+                                                                800 - 12 12 23 52
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-5 text-center">
+                                                        <img src="{{ asset('/dist/img/user2-160x160.jpg') }}"
+                                                             alt="user-avatar" class="img-circle img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer row">
+                                                <div class="col-md-6 text-left">
+                                                    <a href="#" class="btn btn-sm btn-success">
+                                                        <i class="fas fa-plus"></i> Follow
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <a href="#" class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-user"></i> View Profile
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="settings">
+                                <form class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="title" class="col-sm-2 col-form-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="Title" placeholder="Title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="inputEmail"
+                                                   placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="photo" class="col-sm-2 col-form-label">Photo</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="photo"
+                                                           placeholder="Your profile photo">
+                                                    <label class="custom-file-label" for="photo" style="color: grey;">Your
+                                                        profile photo</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+    </div>
+    </body>
+{% endblock %}
