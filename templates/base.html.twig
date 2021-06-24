@@ -1,19 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {# Run `composer require symfony/webpack-encore-bundle`
+       and uncomment the following Encore helpers to start using Symfony UX #}
+    {% block stylesheets %}
+        {#{{ encore_entry_link_tags('app') }}#}
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+              rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="{{ asset('plugins/fontawesome-free/css/all.css') }}" rel="stylesheet">
+        <link href="{{ asset('plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+        <!-- Theme style -->
+        <link href="{{ asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" rel="stylesheet">
+    {% endblock %}
+
+    {% block javascripts %}
+        {#{{ encore_entry_script_tags('app') }}#}
+
+        <!-- jQuery -->
+        <script src="plugins/jquery-knob/{{ asset('plugins/jquery/jquery.min.js') }}" defer></script>
+        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}" defer></script>
+        <!-- Bootstrap 4 -->
+        <script src="{{ asset('plugins/bs-stepper/js/bs-stepper.min.js') }}" defer></script>
+
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
+        <!-- AdminLTE App -->
+        <script src="{{ asset('dist/js/adminlte.min.js') }}" defer></script>
+        <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}" defer></script>
+        <script>
+            // "myAwesomeDropzone" is the camelized version of the HTML element's ID
+            Dropzone.options.myAwesomeDropzone = {
+                paramName: "file", // The name that will be used to transfer the file
+                maxFilesize: 2, // MB
+                thumbnailWidth: null,
+                thumbnailHeight: null,
+                accept: function (file, done) {
+                    if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                    } else {
+                        done();
+                    }
+                }
+            };
+        </script>
+    {% endblock %}
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
 </html>
