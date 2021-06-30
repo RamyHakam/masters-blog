@@ -21,16 +21,8 @@
     {% endblock %}
 
     {% block javascripts %}
-        {#{{ encore_entry_script_tags('app') }}#}
+        {{ encore_entry_script_tags('app') }}
 
-        <!-- jQuery -->
-        <script src="{{ asset('plugins/jquery/jquery.min.js') }}" defer></script>
-        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}" defer></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{ asset('plugins/bs-stepper/js/bs-stepper.min.js') }}" defer></script>
-
-        <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}" defer></script>
-        <!-- AdminLTE App -->
         <script src="{{ asset('dist/js/adminlte.min.js') }}" defer></script
     {% endblock %}
 </head>
