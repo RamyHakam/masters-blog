@@ -23,4 +23,16 @@ class PostController extends AbstractController
     {
         return $this->render('delete_request.html.twig');
     }
+
+
+    /**
+     * @Route("/post/{id}",name="single_post",methods={"GET"})
+     * @return Response
+     */
+    public function getPostAction(int $id)
+    {
+        return $this->render('single_post.html.twig',['id' => $id]);
+    }
+
+
 }

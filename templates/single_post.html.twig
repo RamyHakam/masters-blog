@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Admin Login
+{% endblock %}
+
+{% block body %}
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        {% include 'navbar.html.twig' %}
+        {% include 'sideMenu.html.twig' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="post">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- Box Comment -->
+                                    <div class="card card-widget">
+                                        <div class="card-header">
+                                            <div class=" col-md-11 user-block">
+                                                <img class="img-circle" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Image">
+                                                <span class="username"><a href="#">Elizabeth Pierce.</a></span>
+                                                <span class="description">Shared publicly - 7:30 PM Today</span>
+                                            </div>
+                                            <div class=" col-md-1 card-tools d-flex justify-content-end">
+                                                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <p>I took this photo this morning. What do you guys think?</p>
+                                            <img class="img-fluid pad" style="margin-bottom: 1rem;" src="{{ asset('dist/img/photo2.png') }}"
+                                                 alt="Photo">
+                                            <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like
+                                            </button>
+                                            <span class="float-right text-muted">127 likes - 3 comments</span>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer card-comments">
+                                            <div class="card-comment">
+                                                <!-- User image -->
+                                                <img class="img-circle img-sm" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Image">
+
+                                                <div class="comment-text">
+                    <span class="username">
+                      Elizabeth Pierce
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                                    It is a long established fact that a reader will be distracted
+                                                    by the readable content of a page when looking at its layout.
+                                                </div>
+                                                <!-- /.comment-text -->
+                                            </div>
+                                            <!-- /.card-comment -->
+                                            <div class="card-comment">
+                                                <!-- User image -->
+                                                <img class="img-circle img-sm" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="User Image">
+
+                                                <div class="comment-text">
+                    <span class="username">
+                      Luna Stark
+                      <span class="text-muted float-right">8:03 PM Today</span>
+                    </span><!-- /.username -->
+                                                    It is a long established fact that a reader will be distracted
+                                                    by the readable content of a page when looking at its layout.
+                                                </div>
+                                                <!-- /.comment-text -->
+                                            </div>
+                                            <!-- /.card-comment -->
+                                        </div>
+                                        <!-- /.card-footer -->
+                                        <div class="card-footer">
+                                            <form action="#" method="post">
+                                                <img class="img-fluid img-circle img-sm" src="{{ asset('dist/img/user3-128x128.jpg') }}" alt="Alt Text">
+                                                <!-- .img-push is used to add margin to elements next to floating images -->
+                                                <div class="img-push">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                           placeholder="Press enter to post comment">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- /.card-footer -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        {%  include 'footer.html.twig' %}
+    </div>
+    </body>
+
+{% endblock %}
