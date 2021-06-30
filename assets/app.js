@@ -11,11 +11,6 @@ import './styles/app.css';
 import $ from 'jquery';
 global.$ = global.jQuery = $;
 import 'bootstrap';
-import 'dropzone'
 import 'bs-stepper';
 import 'select2';
-
-
-
-// start the Stimulus application
 import './bootstrap';
