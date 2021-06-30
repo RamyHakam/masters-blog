@@ -1,17 +1,21 @@
 {
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.3",
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.0.0",
+        "add": "^2.0.6",
         "bootstrap": "4",
         "bs-stepper": "1",
         "core-js": "^3.0.0",
         "dropzone": "^5.9.2",
+        "ionicons": "2",
         "jquery": "3",
         "popper.js": "^1.16.1",
         "regenerator-runtime": "^0.13.2",
         "select2": "^4.0.13",
         "stimulus": "^2.0.0",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.6.0",
+        "yarn": "^1.22.10"
     },
     "license": "UNLICENSED",
     "private": true,

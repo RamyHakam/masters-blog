@@ -1,3 +1,9 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "~bs-stepper/dist/css/bs-stepper.min.css";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+@import "~ionicons/css/ionicons.min.css";
+@import "~dropzone/dist/dropzone.css";
+
 body {
     background-color: lightgray;
 }

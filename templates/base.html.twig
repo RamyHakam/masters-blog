@@ -6,23 +6,13 @@
     {# Run `composer require symfony/webpack-encore-bundle`
        and uncomment the following Encore helpers to start using Symfony UX #}
     {% block stylesheets %}
-        {#{{ encore_entry_link_tags('app') }}#}
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
-              rel="stylesheet">
-        <!-- Font Awesome -->
-        <link href="{{ asset('plugins/fontawesome-free/css/all.css') }}" rel="stylesheet">
-        <link href="{{ asset('plugins/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
-
-        <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+        {{ encore_entry_link_tags('app') }}
         <!-- Theme style -->
         <link href="{{ asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" rel="stylesheet">
     {% endblock %}
 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
-
         <script src="{{ asset('dist/js/adminlte.min.js') }}" defer></script
     {% endblock %}
 </head>
