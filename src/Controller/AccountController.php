@@ -27,4 +27,13 @@ class AccountController extends  AbstractController
     {
         return  $this->render('profile_view.html.twig',['id' => $id]);
     }
+
+     /**
+          * @Route("/account_list",name="account_list")
+          * @return Response
+          */
+         public function listAction()
+         {
+             return  $this->render('account_list.html.twig');
+         }
 }
