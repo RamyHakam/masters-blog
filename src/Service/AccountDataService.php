@@ -2,13 +2,11 @@
 
 namespace App\Service;
 
-
 use App\Contract\UploadFileInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class PostService
+class AccountDataService
 {
-
     /**
      * @var UploadFileInterface
      */
@@ -16,28 +14,17 @@ class PostService
 
     public function __construct(UploadFileInterface $uploadFile)
     {
-
         $this->uploadFile = $uploadFile;
     }
 
-    public function createNewPost()
+    public function getUserData(UserInterface $user)
     {
 
     }
 
-    public function getAllPosts(UserInterface $user = null )
+    public function updateUserData()
     {
 
     }
 
-
-    public function likePost()
-    {
-
-    }
-
-    public function commentOnPost()
-    {
-
-    }
 }
