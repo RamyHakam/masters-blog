@@ -26,6 +26,8 @@ services:
 
     App\Service\SendEmailService:
         lazy: true
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Listener\AbstractUserListener:
+           tags:
+               - name: 'doctrine.orm.entity_listener'
+                 event: 'prePersist'
+                 entity: 'App\Entity\AbstractUser'
