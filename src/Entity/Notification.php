@@ -26,7 +26,7 @@ class Notification
     private ?Account $owner;
 
     /**
-     * @ORM\OneToOne(targetEntity=Account::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Account::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private ?Account $account;
