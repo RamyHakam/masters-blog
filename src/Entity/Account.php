@@ -22,33 +22,33 @@ class Account extends  AbstractUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $phone;
+    private string $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $address;
+    private string $address;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="account")
      */
-    private ArrayCollection $posts;
+    private Collection $posts;
 
     /**
      * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="owner")
      */
-    private ArrayCollection $notifications;
+    private Collection $notifications;
 
     /**
      * @ORM\OneToMany(targetEntity=Followers::class, mappedBy="account")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ArrayCollection $followers;
+    private Collection $followers;
 
 
     public function __construct()
