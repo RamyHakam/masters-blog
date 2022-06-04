@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\PostRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+
+/**
+ * @ORM\Entity(repositoryClass=PostRepository::class)
+ */
+class Post
+{
+    use TimestampableEntity;
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $account;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $text;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $likes;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    public function getText(): ?string
+    {
+        return $this->text;
+    }
+
+    public function setText(?string $text): self
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+}
