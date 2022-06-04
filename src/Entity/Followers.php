@@ -73,4 +73,14 @@ class Followers
     {
         return $this->followed_since;
     }
+
+    /**
+     * @param DateTime $followed_since
+     * @return Followers
+     */
+    public function setFollowedSince(DateTime $followed_since): Followers
+    {
+        $this->followed_since = $followed_since;
+        return $this;
+    }
 }
