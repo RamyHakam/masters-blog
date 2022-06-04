@@ -45,11 +45,11 @@ class Account extends  AbstractUser
     private ArrayCollection $notifications;
 
     /**
-    * @ORM\ManyToMany(targetEntity=Account::class)
-     * @ORM\JoinTable(name="followers")
-     * @ORM\JoinColumn(name="follower_id", referencedColumnName="id")
-*/
+     * @ORM\OneToMany(targetEntity=Followers::class, mappedBy="account")
+     * @ORM\JoinColumn(nullable=false)
+     */
     private ArrayCollection $followers;
+
 
     public function __construct()
     {
@@ -155,30 +155,35 @@ class Account extends  AbstractUser
                 $notification->setOwner(null);
             }
         }
-
         return $this;
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection<int, Followers>
      */
     public function getFollowers(): Collection
     {
         return $this->followers;
     }
 
-    public function addFollower(self $follower): self
+    public function addFollower(Followers $follower): self
     {
         if (!$this->followers->contains($follower)) {
             $this->followers[] = $follower;
+            $follower->setAccount($this);
         }
 
         return $this;
     }
 
-    public function removeFollower(self $follower): self
+    public function removeFollower(Followers $follower): self
     {
-        $this->followers->removeElement($follower);
+        if ($this->followers->removeElement($follower)) {
+            // set the owning side to null (unless already changed)
+            if ($follower->getAccount() === $this) {
+                $follower->setAccount(null);
+            }
+        }
 
         return $this;
     }
