@@ -44,10 +44,18 @@ class Account extends  AbstractUser
      */
     private ArrayCollection $notifications;
 
+    /**
+    * @ORM\ManyToMany(targetEntity=Account::class)
+     * @ORM\JoinTable(name="followers")
+     * @ORM\JoinColumn(name="follower_id", referencedColumnName="id")
+*/
+    private ArrayCollection $followers;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +155,30 @@ class Account extends  AbstractUser
                 $notification->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollowers(): Collection
+    {
+        return $this->followers;
+    }
+
+    public function addFollower(self $follower): self
+    {
+        if (!$this->followers->contains($follower)) {
+            $this->followers[] = $follower;
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): self
+    {
+        $this->followers->removeElement($follower);
 
         return $this;
     }
