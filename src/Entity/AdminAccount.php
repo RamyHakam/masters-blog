@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AdminAccount extends  AbstractUser
 {
+    public  const ROLE_ADMIN = 'ROLE_ADMIN';
+    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

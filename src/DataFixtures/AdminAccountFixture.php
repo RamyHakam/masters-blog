@@ -1,0 +1,1 @@
+<?phpnamespace App\DataFixtures;use App\Factory\AdminAccountFactory;use Doctrine\Bundle\FixturesBundle\Fixture;use Doctrine\Persistence\ObjectManager;class AdminAccountFixture extends  Fixture{    public function load(ObjectManager $manager): void    {        AdminAccountFactory::createMany(5);        $manager->flush();    }}
