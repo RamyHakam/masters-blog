@@ -22,26 +22,32 @@ class Account extends  AbstractUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $phone;
+    private ?string $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $address;
+    private ?string $address;
 
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="account")
      */
-    private $posts;
+    private ArrayCollection $posts;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="owner")
+     */
+    private ArrayCollection $notifications;
 
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,36 @@ class Account extends  AbstractUser
             // set the owning side to null (unless already changed)
             if ($post->getAccount() === $this) {
                 $post->setAccount(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getOwner() === $this) {
+                $notification->setOwner(null);
             }
         }
 
