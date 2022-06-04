@@ -23,13 +23,13 @@ class Comment
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Post;
+    private Post $post;
 
     /**
-     * @ORM\OneToOne(targetEntity=Account::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Account::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Account;
+    private Account $account;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,24 +43,24 @@ class Comment
 
     public function getPost(): ?Post
     {
-        return $this->Post;
+        return $this->post;
     }
 
-    public function setPost(?Post $Post): self
+    public function setPost(?Post $post): self
     {
-        $this->Post = $Post;
+        $this->post = $post;
 
         return $this;
     }
 
     public function getAccount(): ?Account
     {
-        return $this->Account;
+        return $this->account;
     }
 
-    public function setAccount(Account $Account): self
+    public function setAccount(Account $account): self
     {
-        $this->Account = $Account;
+        $this->account = $account;
 
         return $this;
     }
