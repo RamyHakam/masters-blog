@@ -45,7 +45,7 @@ class Post
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true)
      */
-    private ArrayCollection $comments;
+    private Collection $comments;
 
     public function __construct()
     {
