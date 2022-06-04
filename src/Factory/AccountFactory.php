@@ -46,6 +46,7 @@ final class AccountFactory extends ModelFactory
             'phone' => self::faker()->phoneNumber(),
             'title' => self::faker()->jobTitle,
             'address' => self::faker()->address(),
+            'avatar' => self::faker()->imageUrl('300', '300','people'),
         ];
     }
 
