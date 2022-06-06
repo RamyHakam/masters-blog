@@ -35,12 +35,16 @@ final class PostFactory extends ModelFactory
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
     }
 
+    public function withPhoto()
+    {
+        return $this->addState(['photo' => self::faker()->imageUrl(1920,1080,'cats'),'text' => self::faker()->sentence]) ;
+    }
+
     protected function getDefaults(): array
     {
         return [
             'likes' => self::faker()->randomNumber(3),
-            'text' => self::faker()->sentence,
-            'photo' => self::faker()->imageUrl(1920,1080,'cats'),
+            'text' => self::faker()->text,
         ];
     }
 

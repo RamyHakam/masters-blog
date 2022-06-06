@@ -106,7 +106,7 @@
                                                 <div class="card-header">
                                                     <div class=" col-md-11 user-block">
                                                         <img class="img-circle"
-                                                             src="{{ asset('/dist/img/user3-128x128.jpg') }}"
+                                                             src="{{ account.avatar() }}"
                                                              alt="User Image">
                                                         <span class="username"><a href="#">{{ account.getFullName() }}</a></span>
                                                         <span class="description">{{ post.createdAt| date('Y-m-d H:i:s') }}</span>
@@ -125,9 +125,11 @@
                                                 <!-- /.card-header -->
                                                 <div class="card-body">
                                                     <div class="col-12">
-                                                    <p>{{ post.text }}</p>
+                                                    <p5>{{ post.text }}</p5>
+                                                        {% if post.photo %}
                                                     <img class="img-fluid pad" style="margin-bottom: 1rem;"
                                                          src="{{ post.photo }}" alt="Photo">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="col-12">
                                                     <button type="button" class="btn btn-default btn-sm"><i
