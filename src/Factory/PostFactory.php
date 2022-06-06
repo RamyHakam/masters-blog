@@ -40,7 +40,7 @@ final class PostFactory extends ModelFactory
         return [
             'likes' => self::faker()->randomNumber(3),
             'text' => self::faker()->sentence,
-            'photo' => self::faker()->imageUrl(640,480,'cats'),
+            'photo' => self::faker()->imageUrl(1920,1080,'cats'),
         ];
     }
 

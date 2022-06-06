@@ -204,4 +204,8 @@ class Account extends  AbstractUser
 
         return $this;
     }
+    public  function  getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }

@@ -16,15 +16,15 @@ class AccountController extends AbstractController
     /**
      * @var PostService
      */
-    private $postService;
+    private PostService  $postService;
     /**
      * @var AccountDataService
      */
-    private $accountDataService;
+    private  AccountDataService  $accountDataService;
     /**
      * @var FollowService
      */
-    private $followService;
+    private FollowService  $followService;
 
     public function __construct(PostService $postService, AccountDataService $accountDataService, FollowService $followService)
     {
@@ -39,7 +39,8 @@ class AccountController extends AbstractController
      */
     public function getProfile()
     {
-        return $this->render('profile.html.twig');
+        $userAccount  = $this->accountDataService->getUserData();
+        return $this->render('profile.html.twig',['account'=>$userAccount]);
     }
 
     /**

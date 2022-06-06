@@ -43,7 +43,7 @@ class Post
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
      */
     private Collection $comments;
 
