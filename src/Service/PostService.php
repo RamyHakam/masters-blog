@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use App\Contract\UploadFileInterface;
+use App\Repository\PostRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostService
@@ -12,12 +13,14 @@ class PostService
     /**
      * @var UploadFileInterface
      */
-    private $uploadFile;
+    private UploadFileInterface  $uploadFile;
+    private PostRepository $postRepository;
 
-    public function __construct(UploadFileInterface $uploadFile)
+    public function __construct(UploadFileInterface $uploadFile, PostRepository  $postRepository)
     {
 
         $this->uploadFile = $uploadFile;
+        $this->postRepository = $postRepository;
     }
 
     public function createNewPost()
@@ -25,11 +28,10 @@ class PostService
 
     }
 
-    public function getAllPosts(UserInterface $user = null )
+    public function getAllPosts(UserInterface $user = null ):array
     {
-
+        return $this->postRepository->findAll();
     }
-
 
     public function likePost()
     {

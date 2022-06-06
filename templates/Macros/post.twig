@@ -1,4 +1,4 @@
-{% macro post(POST) %}
+{% macro post(post,account) %}
     <div class="post">
         <div class="row">
             <div class="col-md-12">
@@ -6,9 +6,9 @@
                 <div class="card card-widget">
                     <div class="card-header">
                         <div class=" col-md-11 user-block">
-                            <img alt="User Image" class="img-circle" src={{ asset('dist/img/user3-128x128.jpg') }}>
-                            <span class="username"><a href="#">Elizabeth Pierce.</a></span>
-                            <span class="description">Shared publicly - 7:30 PM Today</span>
+                            <img alt="User Image" class="img-circle" src={{ post.account.avatar }}>
+                            <span class="username"><a href="#">{{ post.account.getFullName }}</a></span>
+                            <span class="description">{{ post.createdAt|ago }}</span>
                         </div>
                         <div class=" col-md-1 card-tools d-flex justify-content-end">
                             <button class="btn btn-tool" data-card-widget="remove" type="button">
@@ -18,52 +18,44 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <p>I took this photo this morning. What do you guys think?</p>
-                        <img alt="Photo" class="img-fluid pad" src="{{ asset('dist/img/photo2.png') }}"
-                             style="margin-bottom: 1rem; margin-right: 2rem">
+                        <div class="col-12">
+                        <p>{{ post.text }}</p>
+                            {% if post.photo %}
+                                <img class="img-fluid pad" src="{{ post.photo }}" alt="Photo"
+                                style="margin-bottom: 1rem; margin-right: 2rem">
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
                         <button class="btn btn-default btn-sm" type="button"><i class="far fa-thumbs-up"></i> Like
                         </button>
                         <button class="btn btn-danger btn-sm" type="button"><i class="far fa-trash-alt"></i> Remove
                         </button>
-                        <span class="float-right text-muted">127 likes - 3 comments</span>
+                        <span class="float-right text-muted">{{ post.likes}} likes - {{ post.comments| length}}  comments</span>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer card-comments">
+                        {% for comment in post.comments %}
                         <div class="card-comment">
                             <!-- User image -->
-                            <img alt="User Image" class="img-circle img-sm" src="{{ asset('dist/img/user3-128x128.jpg') }}">
+                            <img alt="User Image" class="img-circle img-sm" src="{{ comment.account.avatar }}">
 
                             <div class="comment-text">
                     <span class="username">
-                      Elizabeth Pierce
-                      <span class="text-muted float-right">8:03 PM Today</span>
+                      {{ comment.account.getFullName }}
+                      <span class="text-muted float-right">{{ comment.createdAt|ago }}</span>
                     </span><!-- /.username -->
-                                It is a long established fact that a reader will be distracted
-                                by the readable content of a page when looking at its layout.
+                               {{ comment.commentText }}
                             </div>
                             <!-- /.comment-text -->
                         </div>
                         <!-- /.card-comment -->
-                        <div class="card-comment">
-                            <!-- User image -->
-                            <img alt="User Image" class="img-circle img-sm" src="{{ asset('dist/img/user4-128x128.jpg') }}">
-
-                            <div class="comment-text">
-                    <span class="username">
-                      Luna Stark
-                      <span class="text-muted float-right">8:03 PM Today</span>
-                    </span><!-- /.username -->
-                                It is a long established fact that a reader will be distracted
-                                by the readable content of a page when looking at its layout.
-                            </div>
-                            <!-- /.comment-text -->
-                        </div>
-                        <!-- /.card-comment -->
+                        {% endfor %}
                     </div>
                     <!-- /.card-footer -->
                     <div class="card-footer">
                         <form action="#" method="post">
-                            <img alt="Alt Text" class="img-fluid img-circle img-sm" src="{{ asset('dist/img/user4-128x128.jpg') }}">
+                            <img alt="Alt Text" class="img-fluid img-circle img-sm" src="{{ account.avatar }}">
                             <!-- .img-push is used to add margin to elements next to floating images -->
                             <div class="img-push">
                                 <input class="form-control form-control-sm" placeholder="Press enter to post comment"

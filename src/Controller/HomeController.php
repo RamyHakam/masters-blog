@@ -4,8 +4,10 @@
 namespace App\Controller;
 
 
+use App\Service\AccountDataService;
 use App\Service\PostService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends  AbstractController
@@ -13,20 +15,23 @@ class HomeController extends  AbstractController
     /**
      * @var PostService
      */
-    private $postService;
+    private PostService  $postService;
+    private AccountDataService $accountDataService;
 
-    public function __construct(PostService $postService)
+    public function __construct(PostService $postService, AccountDataService  $accountDataService)
     {
         $this->postService = $postService;
+        $this->accountDataService = $accountDataService;
     }
 
     /**
      * @Route("/home", name="home_page")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function Home()
     {
-       return $this->render('home.html.twig');
+        $account = $this->accountDataService->getUserData();
+        $posts = $this->postService->getAllPosts();
+       return $this->render('home.html.twig',['posts'=>$posts,'account'=>$account]);
     }
-
 }
