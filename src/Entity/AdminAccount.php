@@ -16,16 +16,16 @@ class AdminAccount extends  AbstractUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $AdminRole;
+    private $adminRole;
 
     public function getAdminRole(): ?string
     {
-        return $this->AdminRole;
+        return $this->adminRole;
     }
 
-    public function setAdminRole(string $AdminRole): self
+    public function setAdminRole(string $adminRole): self
     {
-        $this->AdminRole = $AdminRole;
+        $this->adminRole = $adminRole;
 
         return $this;
     }

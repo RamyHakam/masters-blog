@@ -13,10 +13,10 @@
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img alt="User Image" class="img-circle elevation-2" src="{{ asset('dist/img/user3-128x128.jpg') }}">
+                    <img alt="User Image" class="img-circle elevation-2" src="{{ account.avatar }}">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ path('profile_page') }}">Elizabeth Pierce </a>
+                    <a class="d-block" href="{{ path('profile_page') }}">{{ account.getFullName}} </a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
@@ -27,7 +27,7 @@
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Home
-                                <span class="right badge badge-danger">35</span>
+                                <span class="right badge badge-danger">{{ account.posts|length }}</span>
                             </p>
                         </a>
                     </li>
@@ -36,7 +36,7 @@
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Notification
-                                <span class="badge badge-info right">6</span>
+                                <span class="badge badge-info right">{{ account.notifications|length }}</span>
                             </p>
                         </a>
                     </li>

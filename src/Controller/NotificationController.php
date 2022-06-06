@@ -20,6 +20,6 @@ class NotificationController extends AbstractController
     {
         $userAccount  = $accountDataService->getUserData();
         $notificationList = $notificationService->fetchNotification($userAccount);
-        return $this->render('notifications.html.twig',['notificationList'=>$notificationList]);
+        return $this->render('notifications.html.twig',['notificationList'=>$notificationList,'account' => $userAccount]);
     }
 }

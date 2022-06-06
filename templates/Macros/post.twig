@@ -28,8 +28,10 @@
                         <div class="col-12">
                         <button class="btn btn-default btn-sm" type="button"><i class="far fa-thumbs-up"></i> Like
                         </button>
+                            {% if account.adminRole is defined %}
                         <button class="btn btn-danger btn-sm" type="button"><i class="far fa-trash-alt"></i> Remove
                         </button>
+                            {% endif %}
                         <span class="float-right text-muted">{{ post.likes}} likes - {{ post.comments| length}}  comments</span>
                         </div>
                     </div>
