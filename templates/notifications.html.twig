@@ -30,40 +30,19 @@
                                 <div class="table-responsive mailbox-messages">
                                     <table class="table table-hover">
                                         <tbody>
+                                        {% for notification in notificationList %}
                                         <tr>
 
                                             <td class="mailbox-star user-panel">
                                                 <div class="img">
-                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ asset('dist/img/avatar.png') }}">
+                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ notification.account.avatar }}">
                                                 </div>
                                             </td>
-
-                                            <td class="mailbox-name text-center"><a href="{{ path('profile_page_view',{id:1}) }}"> <b>Alexander Pierce</b> Start Following You</a></td></td>
-                                            <td class="mailbox-date">5 mins ago</td>
+                                            <td class="mailbox-name text-center"><a href="{{ path('profile_page_view',{id:notification.account.id}) }}"> <b>{{ notification.account.getFullName }}</b> Start Following You</a></td></td>
+                                            <td class="mailbox-date">{{ notification.createdAt|ago }}</td>
                                         </tr>
+                                        {% endfor %}
 
-                                        <tr>
-
-                                            <td class="mailbox-star user-panel">
-                                                <div class="img">
-                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ asset('dist/img/avatar.png') }}">
-                                                </div>
-                                            </td>
-
-                                            <td class="mailbox-name text-center"><a href="{{ path('single_post',{id:1}) }}"> <b>Alexander Pierce</b> Comment in your post</a></td></td>
-                                            <td class="mailbox-date">2 days ago</td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="mailbox-star user-panel">
-                                                <div class="img">
-                                                    <img alt="Avatar" class="img-circle elevation-2" src="{{ asset('dist/img/avatar.png') }}">
-                                                </div>
-                                            </td>
-
-                                            <td class="mailbox-name text-center"><a href="{{ path('profile_page_view',{id:1}) }}"> <b>Ahmed Mohamed</b> Start Following You</a></td></td>
-                                            <td class="mailbox-date">5 days ago</td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                     <!-- /.table -->

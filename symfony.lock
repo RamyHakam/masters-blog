@@ -112,6 +112,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.7.0"
     },
+    "knplabs/knp-time-bundle": {
+        "version": "v1.19.0"
+    },
     "laminas/laminas-code": {
         "version": "4.4.0"
     },
