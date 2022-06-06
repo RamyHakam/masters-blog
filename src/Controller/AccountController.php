@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Account;
 use App\Service\AccountDataService;
 use App\Service\FollowService;
 use App\Service\PostService;
@@ -47,9 +48,9 @@ class AccountController extends AbstractController
      * @Route("/profile/{id}",name="profile_page_view")
      * @return Response
      */
-    public function viewProfile(int $id)
+    public function viewProfile(Account $account)
     {
-        return $this->render('profile_view.html.twig', ['id' => $id]);
+        return $this->render('profile_view.html.twig', ['account' => $account]);
     }
 
     /**
