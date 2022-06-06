@@ -13,13 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Account extends  AbstractUser
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private string $phone;
@@ -61,11 +54,6 @@ class Account extends  AbstractUser
         $this->posts = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->followers = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getPhone(): ?string

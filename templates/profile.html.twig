@@ -183,12 +183,9 @@
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="timeline">
                                 <div class="row">
-                                    {{ profile.profile('1') }}
-                                    {{ profile.profile('6') }}
-                                    {{ profile.profile('5') }}
-                                    {{ profile.profile('4') }}
-                                    {{ profile.profile('3') }}
-                                    {{ profile.profile('2') }}
+                                    {% for follower in account.followers %}
+                                    {{ profile.profile(follower.followedBy) }}
+                                    {% endfor %}
                                 </div>
                             </div>
                             <!-- /.tab-pane -->

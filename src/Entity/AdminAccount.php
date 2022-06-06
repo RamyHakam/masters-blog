@@ -12,22 +12,11 @@ class AdminAccount extends  AbstractUser
 {
     public  const ROLE_ADMIN = 'ROLE_ADMIN';
     public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $AdminRole;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getAdminRole(): ?string
     {
