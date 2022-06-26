@@ -14,17 +14,25 @@
             <div class="card-body">
                 <p class="login-box-msg">Register a new membership</p>
 
-                <form action="{{ path('home_page') }}" method="post">
+               {{ form_start(form) }}
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Full name">
+                        {{ form_widget(form.firstName, { 'attr': {'class': 'form-control', 'placeholder': 'First Name'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>
+                <div class="input-group mb-3">
+                    {{ form_widget(form.LastName, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name'} }) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -32,7 +40,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Phone">
+                        {{ form_widget(form.phone, { 'attr': {'class': 'form-control', 'placeholder': 'Phone'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-phone"></span>
@@ -40,16 +48,15 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Title">
+                        {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Title'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-briefcase"></span>
                             </div>
                         </div>
                     </div>
-
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="address">
+                        {{ form_widget(form.address, { 'attr': {'class': 'form-control', 'placeholder': 'Your Address'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-address-card"></span>
@@ -58,15 +65,7 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
+                        {{ form_widget(form.plainPlassword, { 'attr': {'class': 'form-control'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -76,11 +75,8 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile" placeholder="Your profile photo">
-                                <label class="custom-file-label" for="exampleInputFile" style="color: grey">Your profile photo</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
+                                {{ form_widget(form.avatar, { 'attr': {'class': 'custom-file-input', 'placeholder': 'Your Image'} }) }}
+                                {{ form_label(form.avatar, 'Your Image', { 'label_attr': {'class': 'custom-file-label'} }) }}
                             </div>
                         </div>
                     </div>
@@ -90,7 +86,8 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
                 <a href="{{ path('login_page') }}" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
