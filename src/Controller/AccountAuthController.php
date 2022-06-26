@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Form\UserLoginType;
 use App\Service\AccountService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,11 @@ class AccountAuthController extends  AbstractController
      */
     public function loginAction()
     {
-        return $this->render('login.html.twig');
+        $form = $this->createForm(UserLoginType::class);
+
+        return $this->render('login.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
