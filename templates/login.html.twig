@@ -6,6 +6,7 @@
 
 {% block body %}
     <body class="hold-transition login-page">
+    {{ parent() }}
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -47,7 +48,8 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
+                  {{ form_rest(form) }}
+                {{ form_end(form) }}
                 <p class="mb-1">
                     <a href="{{ path('forget_password_page') }}">I forgot my password</a>
                 </p>

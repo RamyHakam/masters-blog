@@ -13,6 +13,13 @@
     {% endblock %}
 </head>
 
-{% block body %}{% endblock %}
+{% block body %}
+{%for flash in app.flashes('error') %}
+    <div class="alert alert-danger">{{ flash }}</div>
+{% endfor %}
+{%for flash in app.flashes('success') %}
+    <div class="alert alert-success">{{ flash }}</div>
+{% endfor %}
+{% endblock %}
 
 </html>
