@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 <div class="input-group mb-3">
-                    {{ form_widget(form.LastName, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name'} }) }}
+                    {{ form_widget(form.lastName, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name'} }) }}
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -65,18 +65,26 @@
                     </div>
 
                     <div class="input-group mb-3">
-                        {{ form_widget(form.plainPlassword, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control','placeholder':'Your Password'} }) }}
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
+                <div class="input-group mb-3">
+                    {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control','placeholder':'Retype Password'} }) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="custom-file">
-                                {{ form_widget(form.avatar, { 'attr': {'class': 'custom-file-input', 'placeholder': 'Your Image'} }) }}
-                                {{ form_label(form.avatar, 'Your Image', { 'label_attr': {'class': 'custom-file-label'} }) }}
+                                {{ form_widget(form.userPhoto, { 'attr': {'class': 'custom-file-input', 'placeholder': 'Your Image'} }) }}
+                                {{ form_label(form.userPhoto, 'Your Image', { 'label_attr': {'class': 'custom-file-label'} }) }}
                             </div>
                         </div>
                     </div>
