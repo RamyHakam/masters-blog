@@ -5,10 +5,11 @@ namespace App\Controller;
 
 
 use App\Entity\Account;
-use App\Form\RegisterAccountType;
+use App\Form\AccountType;
 use App\Service\AccountDataService;
 use App\Service\FollowService;
 use App\Service\PostService;
+use App\Service\UploadFileService;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,14 +41,21 @@ class AccountController extends AbstractController
      * @Route("/profile",name="profile_page")
      * @return Response
      */
-    public function getProfile(Request  $request)
+    public function getProfile(Request  $request,UploadFileService  $uploadFileService)
     {
         $userAccount  = $this->accountDataService->getUserData();
-        $form = $this->createForm(RegisterAccountType::class,$userAccount);
+        $form = $this->createForm(AccountType::class,$userAccount);
+        $form->remove('plainPassword');
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $userPhoto = $form->get('userPhoto')->getData();
+            if($userPhoto)
+            {
+                $userPhotoName = $uploadFileService->upload($userPhoto);
+                $userAccount->setAvatar($userPhotoName);
+            }
             $this->accountDataService->updateAccount($userAccount);
-            return $this->redirectToRoute('profile_page_view',['account'=>$userAccount]);
+            $this->addFlash('success','Profile updated successfully');
         }
         return $this->render('profile.html.twig',['account'=>$userAccount,'form'=>$form->createView()]);
     }

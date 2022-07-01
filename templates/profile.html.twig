@@ -193,6 +193,7 @@
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane" id="settings">
+                                {{ parent() }}
                                 {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
                                     <div class="form-group row">
                                         {{ form_label(form.firstName, 'First Name', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
@@ -228,20 +229,6 @@
                                         {{ form_label(form.address, 'Address', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
                                         <div class="col-sm-10">
                                             {{ form_widget(form.address, {'attr':{'class':'form-control'}}) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        {{ form_label(form.plainPassword.first, 'New Password', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
-
-                                        <label for="phone" class="col-sm-2 col-form-label">New Password</label>
-                                        <div class="col-sm-10">
-                                            {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control'}}) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        {{ form_label(form.plainPassword.second, 'Confirm Password', {'label_attr':{'class':'col-sm-2 col-form-label'}}) }}
-                                        <div class="col-sm-10">
-                                            {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control'}}) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">

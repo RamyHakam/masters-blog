@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegisterAccountType extends AbstractType
+class AccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -34,6 +34,7 @@ class RegisterAccountType extends AbstractType
             ->add('address')
             ->add('userPhoto', FileType::class, [
                 'mapped' => false,
+                'required' => false,
             ]);
     }
 

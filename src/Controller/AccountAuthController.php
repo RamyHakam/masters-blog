@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Form\ForgetPasswordType;
-use App\Form\RegisterAccountType;
+use App\Form\AccountType;
 use App\Form\UserLoginType;
 use App\Service\AccountService;
 use App\Service\PasswordHasherService;
@@ -63,7 +63,7 @@ class AccountAuthController extends  AbstractController
      */
     public function registerAction(Request  $request, PasswordHasherService  $passwordHasher, UploadFileService  $uploadFileService)
     {
-        $form = $this->createForm(RegisterAccountType::class);
+        $form = $this->createForm(AccountType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $userPhoto = $form->get('userPhoto')->getData();
