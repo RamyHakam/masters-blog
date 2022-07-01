@@ -5,9 +5,11 @@ namespace App\Controller;
 
 
 use App\Entity\Account;
+use App\Form\RegisterAccountType;
 use App\Service\AccountDataService;
 use App\Service\FollowService;
 use App\Service\PostService;
+use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,10 +40,16 @@ class AccountController extends AbstractController
      * @Route("/profile",name="profile_page")
      * @return Response
      */
-    public function getProfile()
+    public function getProfile(Request  $request)
     {
         $userAccount  = $this->accountDataService->getUserData();
-        return $this->render('profile.html.twig',['account'=>$userAccount]);
+        $form = $this->createForm(RegisterAccountType::class,$userAccount);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->accountDataService->updateAccount($userAccount);
+            return $this->redirectToRoute('profile_page_view',['account'=>$userAccount]);
+        }
+        return $this->render('profile.html.twig',['account'=>$userAccount,'form'=>$form->createView()]);
     }
 
     /**
