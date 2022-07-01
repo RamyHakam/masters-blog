@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Account;
+use App\Form\ForgetPasswordType;
 use App\Form\RegisterAccountType;
 use App\Form\UserLoginType;
 use App\Service\AccountService;
@@ -85,8 +86,28 @@ class AccountAuthController extends  AbstractController
      * @Route("/forget_password",name="forget_password_page")
      * @return Response
      */
-    public function forgetPasswordAction()
+    public function forgetPasswordAction(Request  $request)
     {
-        return $this->render('forget_password.html.twig');
+        $form = $this->createForm(ForgetPasswordType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $account = $this->accountService->getAccountByEmail($data['email']);
+            if($account)
+            {
+                $this->accountService->sendPasswordResetLink($account);
+                $this->addFlash('success','Password reset link has been sent to your email');
+                return $this->redirectToRoute('login_page');
+            }
+            else{
+                $this->addFlash('error','Invalid email');
+                return $this->render('forget_password.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
+        }
+        return $this->render('forget_password.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
