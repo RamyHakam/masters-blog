@@ -44,7 +44,7 @@ class Account extends  AbstractUser
     private Collection $followers;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
 
@@ -195,5 +195,10 @@ class Account extends  AbstractUser
     public  function  getFullName()
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    public  function  getAvatarPath() :string
+    {
+        return 'uploads/avatars/' . $this->getAvatar()?? 'uploads/avatars/default.webp';
     }
 }

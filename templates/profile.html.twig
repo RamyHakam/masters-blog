@@ -28,7 +28,7 @@
                                     <h5 class="widget-user-desc text-center">{{ account.title }}</h5>
                                 </div>
                                 <div class="widget-user-image">
-                                    <img class="img-circle" src="{{ account.getAvatar() }}" alt="User Avatar">
+                                    <img class="img-circle" src="{{ asset(account.getAvatarPath()) }}" alt="User Avatar">
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
@@ -106,7 +106,7 @@
                                                 <div class="card-header">
                                                     <div class=" col-md-11 user-block">
                                                         <img class="img-circle"
-                                                             src="{{ account.avatar() }}"
+                                                             src="{{ asset(account.getAvatarPath()) }}"
                                                              alt="User Image">
                                                         <span class="username"><a href="#">{{ account.getFullName() }}</a></span>
                                                         <span class="description">{{ post.createdAt| date('Y-m-d H:i:s') }}</span>
@@ -163,7 +163,7 @@
                                                 <div class="card-footer">
                                                     <form action="#" method="post">
                                                         <img class="img-fluid img-circle img-sm"
-                                                             src="{{ account.getAvatar() }}"
+                                                             src="{{ asset(account.getAvatarPath()) }}"
                                                              alt="Alt Text">
                                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                                         <div class="img-push">
