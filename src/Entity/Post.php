@@ -40,7 +40,7 @@ class Post
     /**
      * @ORM\Column(type="integer")
      */
-    private $likes;
+    private  int $likes = 0;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")

@@ -8,17 +8,18 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="#"  id="new-post" class="dropzone" enctype="multipart/form-data">
+                    {{ form_start(postForm,{'attr':{'class':'dropzone','id':'new-post','enctype':'multipart/form-data'}}) }}
                         <div class="row">
                             <div class="col-sm-12">
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>Add Post</label>
-                                    <textarea class="md-textarea form-control" placeholder="Enter ..." rows="3"></textarea>
+                                    {{ form_widget(postForm.text,{'attr':{'class':'md-textarea form-control','rows':'3'}}) }}
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    {{ form_rest(postForm) }}
+                    {{ form_end(postForm) }}
                     <div class="form-group">
                         <div class="row" id="actions">
                             <div class="col-lg-12">

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Form\PostType;
 use App\Service\AccountDataService;
 use App\Service\PostService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,7 @@ class HomeController extends  AbstractController
     {
         $account = $this->accountDataService->getUserData();
         $posts = $this->postService->getAllPosts();
-       return $this->render('home.html.twig',['posts'=>$posts,'account'=>$account]);
+        $postForm = $this->createForm(PostType::class,null,['action' => '#']);
+       return $this->render('home.html.twig',['posts'=>$posts,'account'=>$account,'postForm'=>$postForm->createView()]);
     }
 }
