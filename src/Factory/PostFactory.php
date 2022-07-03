@@ -4,6 +4,9 @@ namespace App\Factory;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use App\Service\UploadFileService;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -28,16 +31,25 @@ use Zenstruck\Foundry\Proxy;
  */
 final class PostFactory extends ModelFactory
 {
-    public function __construct()
+    const  defaultPhotos = [
+        'post1.webp',
+        'post2.jpeg',
+        'post3.jpg',
+        'post5.jpeg',
+        'post6.jpeg',
+        'post7.webp',
+    ] ;
+    private UploadFileService $uploadFileService;
+
+    public function __construct(UploadFileService  $uploadFileService)
     {
         parent::__construct();
-
-        // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
+        $this->uploadFileService = $uploadFileService;
     }
 
     public function withPhoto()
     {
-        return $this->addState(['photo' => self::faker()->imageUrl(1920,1080,'cats'),'text' => self::faker()->sentence]) ;
+        return $this->addState(['photo' => $this->fakeUploadPostPhoto(),'text' => self::faker()->sentence]) ;
     }
 
     protected function getDefaults(): array
@@ -59,5 +71,14 @@ final class PostFactory extends ModelFactory
     protected static function getClass(): string
     {
         return Post::class;
+    }
+
+    private  function fakeUploadPostPhoto(): string
+    {
+        $avatar = self::faker()->randomElement(self::defaultPhotos);
+        $fs = new Filesystem();
+        $targetPath = sys_get_temp_dir() . '/' . $avatar;
+        $fs->copy(__DIR__ . '/images/posts/' . $avatar , $targetPath);
+        return $this->uploadFileService->upload(new File($targetPath), UploadFileService::PostType);
     }
 }
