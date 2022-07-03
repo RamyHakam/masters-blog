@@ -35,7 +35,7 @@ class PostService
 
     public function getRecentPosts(UserInterface $user = null ):array
     {
-        return $this->postRepository->findRecentPosts();
+        return $this->postRepository->findRecentPosts(350);
     }
 
     public function likePost()

@@ -48,6 +48,8 @@ class HomeController extends  AbstractController
             }
             $post->setAccount($account);
             $this->postService->addPost($post);
+            $postForm = $this->createForm(PostType::class,null,['action' => '#']);
+
         }
         $posts = $this->postService->getRecentPosts();
 
