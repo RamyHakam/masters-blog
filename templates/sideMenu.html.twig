@@ -13,7 +13,7 @@
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img alt="User Image" class="img-circle elevation-2" src="{{ account.avatar }}">
+                    <img alt="User Image" class="img-circle elevation-2" src="{{ asset(account.getAvatarPath()) }}">
                 </div>
                 <div class="info">
                     <a class="d-block" href="{{ path('profile_page') }}">{{ account.getFullName}} </a>

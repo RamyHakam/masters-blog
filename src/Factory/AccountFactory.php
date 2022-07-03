@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Account;
 use App\Repository\AccountRepository;
 use App\Service\UploadFileService;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
@@ -76,7 +77,9 @@ final class AccountFactory extends ModelFactory
     private  function fakeUploadAvatar(): string
     {
         $avatar = self::faker()->randomElement(self::defaultAvatars);
-        $avatarPath = $this->uploadFileService->upload(new File(__DIR__ . '/images/avatars/' . $avatar));
-        return  $avatarPath;
+        $fs = new Filesystem();
+        $targetPath = sys_get_temp_dir() . '/' . $avatar;
+        $fs->copy(__DIR__ . '/images/avatars/' . $avatar , $targetPath);
+        return $this->uploadFileService->upload(new File($targetPath));
     }
 }
