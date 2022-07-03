@@ -28,7 +28,7 @@
                 <div class="container-fluid">
                     {% include 'new_post.html.twig' %}
                     {% for post in posts %}
-                    <div class="row">
+                    <div class="row posts">
                         {{ post.post(post,account) }}
                     </div>
                     {% endfor %}

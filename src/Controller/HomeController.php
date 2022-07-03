@@ -50,6 +50,11 @@ class HomeController extends  AbstractController
             $this->postService->addPost($post);
             $postForm = $this->createForm(PostType::class,null,['action' => '#']);
 
+            if ($request->isXmlHttpRequest())
+            {
+                return  $this->render('wrapper_post.html.twig',['post' => $post,'account' => $account]);
+            }
+
         }
         $posts = $this->postService->getRecentPosts();
 
