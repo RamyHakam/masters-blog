@@ -4,6 +4,8 @@ namespace App\Factory;
 
 use App\Entity\Account;
 use App\Repository\AccountRepository;
+use App\Service\UploadFileService;
+use Symfony\Component\HttpFoundation\File\File;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -28,11 +30,19 @@ use Zenstruck\Foundry\Proxy;
  */
 final class AccountFactory extends ModelFactory
 {
-    public function __construct()
+    const  defaultAvatars = [
+        'thumbnail1.jpg',
+        'thumbnail2.jpg',
+        'thumbnail3.jpg',
+        'thumbnail4.jpg',
+        'thumbnail5.jpg',
+    ] ;
+    private UploadFileService $uploadFileService;
+
+    public function __construct(UploadFileService  $uploadFileService)
     {
         parent::__construct();
-
-        // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
+        $this->uploadFileService = $uploadFileService;
     }
 
     protected function getDefaults(): array
@@ -46,7 +56,7 @@ final class AccountFactory extends ModelFactory
             'phone' => self::faker()->phoneNumber(),
             'title' => self::faker()->jobTitle,
             'address' => self::faker()->address(),
-            'avatar' => self::faker()->imageUrl('300', '300','people'),
+            'avatar' => $this->fakeUploadAvatar(),
         ];
     }
 
@@ -61,5 +71,12 @@ final class AccountFactory extends ModelFactory
     protected static function getClass(): string
     {
         return Account::class;
+    }
+
+    private  function fakeUploadAvatar(): string
+    {
+        $avatar = self::faker()->randomElement(self::defaultAvatars);
+        $avatarPath = $this->uploadFileService->upload(new File(__DIR__ . '/images/avatars/' . $avatar));
+        return  $avatarPath;
     }
 }
