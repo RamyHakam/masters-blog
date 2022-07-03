@@ -15,7 +15,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('text',TextareaType::class)
-            ->add('userPhoto', DropzoneType::class, [
+            ->add('postPhoto', DropzoneType::class, [
                 'mapped' => false,
                 'required' => false,
             ]);

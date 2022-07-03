@@ -51,7 +51,7 @@ class AccountController extends AbstractController
             $userPhoto = $form->get('userPhoto')->getData();
             if($userPhoto)
             {
-                $userPhotoName = $uploadFileService->upload($userPhoto);
+                $userPhotoName = $uploadFileService->upload($userPhoto,UploadFileService::avatarType);
                 $userAccount->setAvatar($userPhotoName);
             }
             $this->accountDataService->updateAccount($userAccount);

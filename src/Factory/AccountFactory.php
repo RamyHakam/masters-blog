@@ -80,6 +80,6 @@ final class AccountFactory extends ModelFactory
         $fs = new Filesystem();
         $targetPath = sys_get_temp_dir() . '/' . $avatar;
         $fs->copy(__DIR__ . '/images/avatars/' . $avatar , $targetPath);
-        return $this->uploadFileService->upload(new File($targetPath));
+        return $this->uploadFileService->upload(new File($targetPath), UploadFileService::avatarType);
     }
 }

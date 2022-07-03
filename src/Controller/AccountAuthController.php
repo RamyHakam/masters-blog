@@ -67,7 +67,7 @@ class AccountAuthController extends  AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $userPhoto = $form->get('userPhoto')->getData();
-            $userPhotoName = $uploadFileService->upload($userPhoto);
+            $userPhotoName = $uploadFileService->upload($userPhoto,UploadFileService::avatarType);
             $plainPassword = $form->get('plainPassword')->getData();
             /** @var Account $userAccountData */
             $userAccountData = $form->getData();

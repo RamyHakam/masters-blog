@@ -4,10 +4,13 @@
 namespace App\Controller;
 
 
+use App\Entity\Post;
 use App\Form\PostType;
 use App\Service\AccountDataService;
 use App\Service\PostService;
+use App\Service\UploadFileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,11 +32,26 @@ class HomeController extends  AbstractController
      * @Route("/home", name="home_page")
      * @return Response
      */
-    public function Home()
+    public function Home(Request  $request,UploadFileService  $uploadFileService)
     {
         $account = $this->accountDataService->getUserData();
-        $posts = $this->postService->getAllPosts();
         $postForm = $this->createForm(PostType::class,null,['action' => '#']);
-       return $this->render('home.html.twig',['posts'=>$posts,'account'=>$account,'postForm'=>$postForm->createView()]);
+        $postForm->handleRequest($request);
+        if ($postForm->isSubmitted() && $postForm->isValid()) {
+            /** @var Post $post */
+            $post = $postForm->getData();
+            $postPhoto = $postForm->get('postPhoto')->getData();
+            if($postPhoto)
+            {
+                $postPhotoName = $uploadFileService->upload($postPhoto,UploadFileService::PostType);
+                $post->setPhoto($postPhotoName);
+            }
+            $post->setAccount($account);
+            $this->postService->addPost($post);
+        }
+        $posts = $this->postService->getRecentPosts();
+
+
+        return $this->render('home.html.twig',['posts'=>$posts,'account'=>$account,'postForm'=>$postForm->createView()]);
     }
 }

@@ -6,7 +6,7 @@
                 <div class="card card-widget">
                     <div class="card-header">
                         <div class=" col-md-11 user-block">
-                            <img alt="User Image" class="img-circle" src={{ post.account.avatar }}>
+                            <img alt="User Image" class="img-circle" src={{ asset(post.account.getAvatarPath()) }}>
                             <span class="username"><a href="#">{{ post.account.getFullName }}</a></span>
                             <span class="description">{{ post.createdAt|ago }}</span>
                         </div>
@@ -40,7 +40,7 @@
                         {% for comment in post.comments %}
                         <div class="card-comment">
                             <!-- User image -->
-                            <img alt="User Image" class="img-circle img-sm" src="{{ comment.account.avatar }}">
+                            <img alt="User Image" class="img-circle img-sm" src="{{ asset(comment.account.getAvatarPath()) }}">
 
                             <div class="comment-text">
                     <span class="username">
@@ -57,7 +57,7 @@
                     <!-- /.card-footer -->
                     <div class="card-footer">
                         <form action="#" method="post">
-                            <img alt="Alt Text" class="img-fluid img-circle img-sm" src="{{ account.avatar }}">
+                            <img alt="Alt Text" class="img-fluid img-circle img-sm" src="{{ asset(post.account.getAvatarPath()) }}">
                             <!-- .img-push is used to add margin to elements next to floating images -->
                             <div class="img-push">
                                 <input class="form-control form-control-sm" placeholder="Press enter to post comment"
