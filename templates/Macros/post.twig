@@ -1,4 +1,5 @@
 {% macro post(post,account) %}
+    {%  import 'Macros/comment.twig' as comment %}
     <div class="post" style="width: 100%">
         <div class="row">
             <div class="col-md-12">
@@ -38,20 +39,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer card-comments">
                         {% for comment in post.comments %}
-                        <div class="card-comment">
-                            <!-- User image -->
-                            <img alt="User Image" class="img-circle img-sm" src="{{ asset(comment.account.getAvatarPath()) }}">
-
-                            <div class="comment-text">
-                    <span class="username">
-                      {{ comment.account.getFullName }}
-                      <span class="text-muted float-right">{{ comment.createdAt|ago }}</span>
-                    </span><!-- /.username -->
-                               {{ comment.commentText }}
-                            </div>
-                            <!-- /.comment-text -->
-                        </div>
-                        <!-- /.card-comment -->
+                            {{ comment.comment(comment) }}
                         {% endfor %}
                     </div>
                     <!-- /.card-footer -->
