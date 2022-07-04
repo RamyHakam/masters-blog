@@ -4,6 +4,8 @@ namespace App\Service;
 
 
 use App\Contract\UploadFileInterface;
+use App\Entity\Account;
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,9 +44,14 @@ class PostService
     {
 
     }
-
-    public function commentOnPost()
+    public function commentOnPost(Post $post , Account  $account, string $commentText): Comment
     {
-
+        $comment = new Comment();
+        $comment->setAccount($account);
+        $comment->setPost($post);
+        $comment->setCommentText($commentText);
+        $this->entityManager->persist($comment);
+        $this->entityManager->flush();
+        return $comment;
     }
 }
