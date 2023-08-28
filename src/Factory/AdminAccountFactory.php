@@ -39,11 +39,12 @@ final class AdminAccountFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'email' => self::faker()->text(),
+            'email' => self::faker()->email(),
             'password' => self::faker()->text(),
-            'firstName' => self::faker()->text(),
-            'lastName' => self::faker()->text(),
-            'AdminRole' => self::faker()->randomElement([AdminAccount::ROLE_ADMIN, AdminAccount::ROLE_SUPER_ADMIN]),
+            'firstName' => self::faker()->firstName(),
+            'lastName' => self::faker()->lastName(),
+            'apiKey' =>sprintf('%s-%s-%s',self::faker()->lexify(),self::faker()->lexify(),self::faker()->lexify()),
+            'roles' => ['ROLE_ADMIN'],
         ];
     }
 

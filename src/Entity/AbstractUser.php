@@ -25,7 +25,7 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    protected array $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255)

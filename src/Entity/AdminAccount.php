@@ -10,22 +10,27 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AdminAccount extends  AbstractUser
 {
-    public  const ROLE_ADMIN = 'ROLE_ADMIN';
-    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $adminRole;
+    private ?string $apiKey;
 
-    public function getAdminRole(): ?string
+    public function getApiKey(): ?string
     {
-        return $this->adminRole;
+        return $this->apiKey;
     }
 
-    public function setAdminRole(string $adminRole): self
+    public function setApiKey(?string $apiKey): self
     {
-        $this->adminRole = $adminRole;
+        $this->apiKey = $apiKey;
+
+        return $this;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
