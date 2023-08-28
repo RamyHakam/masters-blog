@@ -40,17 +40,9 @@ class AccountAuthController extends  AbstractController
         $form = $this->createForm(UserLoginType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            if($data['email'] ==='test@test.com'&&$data['password']==='test')
-            {
+               $data = $form->getData();
+               // log the user to db
                 return $this->redirectToRoute('home_page');
-            }
-            else{
-                $this->addFlash('error','Invalid email or password');
-                return $this->render('login.html.twig', [
-                    'form' => $form->createView()
-                ]);
-            }
         }
         return $this->render('login.html.twig', [
             'form' => $form->createView()

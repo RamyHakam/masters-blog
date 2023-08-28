@@ -26,7 +26,7 @@ class AccountDataService
 
     public function getUserData(?Account $user = null ): ?Account
     {
-        return $this->accountRepository->find(20);
+        return $this->accountRepository->findAll()[0];
     }
 
     public function updateAccount(Account  $account)

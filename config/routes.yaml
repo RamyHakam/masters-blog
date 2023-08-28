@@ -1,0 +1,1 @@
+home:      path: /      controller: App\Controller\AccountAuthController::loginAction
