@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\AbstractUserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AbstractUserRepository::class)
@@ -11,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"user" = "Account", "admin" = "AdminAccount"})
  */
-class AbstractUser
+class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -19,6 +21,11 @@ class AbstractUser
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private array $roles = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -91,5 +98,30 @@ class AbstractUser
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function getSalt()
+    {
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getUsername()
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }
