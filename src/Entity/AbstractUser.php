@@ -37,6 +37,8 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    private string $plainPassword;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -123,5 +125,23 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return AbstractUser
+     */
+    public function setPlainPassword(string $plainPassword): AbstractUser
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
     }
 }

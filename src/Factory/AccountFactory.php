@@ -7,6 +7,7 @@ use App\Repository\AccountRepository;
 use App\Service\UploadFileService;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -39,11 +40,13 @@ final class AccountFactory extends ModelFactory
         'thumbnail5.jpg',
     ] ;
     private UploadFileService $uploadFileService;
+    private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(UploadFileService  $uploadFileService)
+    public function __construct(UploadFileService  $uploadFileService, UserPasswordHasherInterface $passwordHasher)
     {
         parent::__construct();
         $this->uploadFileService = $uploadFileService;
+        $this->passwordHasher = $passwordHasher;
     }
 
     protected function getDefaults(): array
@@ -51,13 +54,13 @@ final class AccountFactory extends ModelFactory
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'email' => self::faker()->email,
-            'password' => self::faker()->password,
-            'firstName' => self::faker()->name,
-            'lastName' => self::faker()->name,
+            'firstName' => self::faker()->firstName(),
+            'lastName' => self::faker()->lastName(),
             'phone' => self::faker()->phoneNumber(),
             'title' => self::faker()->jobTitle,
             'address' => self::faker()->address(),
             'avatar' => $this->fakeUploadAvatar(),
+            'plainPassword' => 'test',
         ];
     }
 
@@ -65,7 +68,9 @@ final class AccountFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(Account $account): void {})
+             ->afterInstantiate(function(Account $account): void {
+                 $account->setPassword($this->passwordHasher->hashPassword($account, $account->getPlainPassword()));
+             })
         ;
     }
 

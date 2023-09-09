@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\AdminAccount;
 use App\Repository\AdminAccountRepository;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -28,11 +29,14 @@ use Zenstruck\Foundry\Proxy;
  */
 final class AdminAccountFactory extends ModelFactory
 {
-    public function __construct()
+    private UserPasswordHasherInterface $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         parent::__construct();
 
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
+        $this->passwordHasher = $passwordHasher;
     }
 
     protected function getDefaults(): array
@@ -40,11 +44,11 @@ final class AdminAccountFactory extends ModelFactory
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'email' => self::faker()->email(),
-            'password' => self::faker()->text(),
             'firstName' => self::faker()->firstName(),
             'lastName' => self::faker()->lastName(),
             'apiKey' =>sprintf('%s-%s-%s',self::faker()->lexify(),self::faker()->lexify(),self::faker()->lexify()),
             'roles' => ['ROLE_ADMIN'],
+            'plainPassword' => 'test',
         ];
     }
 
@@ -52,7 +56,9 @@ final class AdminAccountFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(AdminAccount $adminAccount): void {})
+            ->afterInstantiate(function(AdminAccount $adminAccount): void {
+                $adminAccount->setPassword($this->passwordHasher->hashPassword($adminAccount,$adminAccount->getPlainPassword()));
+            })
         ;
     }
 

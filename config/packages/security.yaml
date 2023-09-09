@@ -20,8 +20,8 @@ security:
                 login_path: login_page
                 check_path: login_page
                 default_target_path: home_page
-                username_parameter: email
-                password_parameter: password
+                username_parameter: user_login[email]
+                password_parameter: user_login[password]
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
