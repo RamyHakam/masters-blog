@@ -13,6 +13,7 @@ services:
         bind:
             bool $isDebug: "%kernel.debug%"
             string $target_dir: "%kernel.project_dir%/public/uploads"
+            $formLoginAuthenticator: "@security.authenticator.form_login.main"
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

@@ -16,8 +16,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 
-class AccountAuthController extends  AbstractController
+class AccountAuthController extends AbstractController
 {
     /**
      * @var AccountService
@@ -25,7 +27,7 @@ class AccountAuthController extends  AbstractController
     private $accountService;
     private EntityManagerInterface $entityManager;
 
-    public function __construct(AccountService $accountService ,EntityManagerInterface  $entityManager)
+    public function __construct(AccountService $accountService, EntityManagerInterface $entityManager)
     {
         $this->accountService = $accountService;
         $this->entityManager = $entityManager;
@@ -35,14 +37,14 @@ class AccountAuthController extends  AbstractController
      * @Route("/login",name="login_page")
      * @return Response
      */
-    public function loginAction( Request  $request)
+    public function loginAction(Request $request)
     {
         $form = $this->createForm(UserLoginType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-               $data = $form->getData();
-               // log the user to db
-                return $this->redirectToRoute('home_page');
+            $data = $form->getData();
+            // log the user to db
+            return $this->redirectToRoute('home_page');
         }
         return $this->render('login.html.twig', [
             'form' => $form->createView()
@@ -53,13 +55,17 @@ class AccountAuthController extends  AbstractController
      * @Route("/register",name="register_page")
      * @return Response
      */
-    public function registerAction(Request  $request, PasswordHasherService  $passwordHasher, UploadFileService  $uploadFileService)
+    public function registerAction(
+        Request                    $request, PasswordHasherService $passwordHasher,
+        UploadFileService          $uploadFileService,
+        UserAuthenticatorInterface $userAuthenticator,
+        FormLoginAuthenticator     $formLoginAuthenticator): Response
     {
         $form = $this->createForm(AccountType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $userPhoto = $form->get('userPhoto')->getData();
-            $userPhotoName = $uploadFileService->upload($userPhoto,UploadFileService::avatarType);
+            $userPhotoName = $uploadFileService->upload($userPhoto, UploadFileService::avatarType);
             $plainPassword = $form->get('plainPassword')->getData();
             /** @var Account $userAccountData */
             $userAccountData = $form->getData();
@@ -67,7 +73,12 @@ class AccountAuthController extends  AbstractController
             $userAccountData->setAvatar($userPhotoName);
             $this->entityManager->persist($userAccountData);
             $this->entityManager->flush();
-            return $this->redirectToRoute('home_page');
+
+            return $userAuthenticator->authenticateUser(
+                $userAccountData,
+                $formLoginAuthenticator,
+                $request
+            );
         }
         return $this->render('register.html.twig', [
             'form' => $form->createView()
@@ -78,21 +89,19 @@ class AccountAuthController extends  AbstractController
      * @Route("/forget_password",name="forget_password_page")
      * @return Response
      */
-    public function forgetPasswordAction(Request  $request)
+    public function forgetPasswordAction(Request $request)
     {
         $form = $this->createForm(ForgetPasswordType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $account = $this->accountService->getAccountByEmail($data['email']);
-            if($account)
-            {
+            if ($account) {
                 $this->accountService->sendPasswordResetLink($account);
-                $this->addFlash('success','Password reset link has been sent to your email');
+                $this->addFlash('success', 'Password reset link has been sent to your email');
                 return $this->redirectToRoute('login_page');
-            }
-            else{
-                $this->addFlash('error','Invalid email');
+            } else {
+                $this->addFlash('error', 'Invalid email');
                 return $this->render('forget_password.html.twig', [
                     'form' => $form->createView()
                 ]);
