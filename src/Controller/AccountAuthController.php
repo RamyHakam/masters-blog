@@ -63,22 +63,31 @@ class AccountAuthController extends AbstractController
     {
         $form = $this->createForm(AccountType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userPhoto = $form->get('userPhoto')->getData();
-            $userPhotoName = $uploadFileService->upload($userPhoto, UploadFileService::avatarType);
-            $plainPassword = $form->get('plainPassword')->getData();
-            /** @var Account $userAccountData */
-            $userAccountData = $form->getData();
-            $userAccountData->setPassword($passwordHasher->hashPassword($plainPassword));
-            $userAccountData->setAvatar($userPhotoName);
-            $this->entityManager->persist($userAccountData);
-            $this->entityManager->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $userPhoto = $form->get('userPhoto')->getData();
+                $userPhotoName = $uploadFileService->upload($userPhoto, UploadFileService::avatarType);
+                $plainPassword = $form->get('plainPassword')->getData();
+                /** @var Account $userAccountData */
+                $userAccountData = $form->getData();
+                $userAccountData->setPassword($passwordHasher->hashPassword($plainPassword));
+                $userAccountData->setAvatar($userPhotoName);
+                $this->entityManager->persist($userAccountData);
+                $this->entityManager->flush();
 
-            return $userAuthenticator->authenticateUser(
-                $userAccountData,
-                $formLoginAuthenticator,
-                $request
-            );
+                return $userAuthenticator->authenticateUser(
+                    $userAccountData,
+                    $formLoginAuthenticator,
+                    $request
+                );
+            }
+            else{
+                $errors = $form->getErrors(true);
+                foreach ($errors as $error){
+                    $this->addFlash('error',$error->getMessage());
+                }
+            }
+
         }
         return $this->render('register.html.twig', [
             'form' => $form->createView()
