@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
@@ -56,7 +57,8 @@ class AccountAuthController extends AbstractController
      * @return Response
      */
     public function registerAction(
-        Request                    $request, PasswordHasherService $passwordHasher,
+        Request                    $request,
+        UserPasswordHasherInterface $passwordHasher,
         UploadFileService          $uploadFileService,
         UserAuthenticatorInterface $userAuthenticator,
         FormLoginAuthenticator     $formLoginAuthenticator): Response
@@ -70,7 +72,7 @@ class AccountAuthController extends AbstractController
                 $plainPassword = $form->get('plainPassword')->getData();
                 /** @var Account $userAccountData */
                 $userAccountData = $form->getData();
-                $userAccountData->setPassword($passwordHasher->hashPassword($plainPassword));
+                $userAccountData->setPassword($passwordHasher->hashPassword($userAccountData, $plainPassword));
                 $userAccountData->setAvatar($userPhotoName);
                 $this->entityManager->persist($userAccountData);
                 $this->entityManager->flush();
@@ -120,4 +122,10 @@ class AccountAuthController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/logout",name="logout_page"")
+     */
+    public function logout()
+    {}
 }
