@@ -40,9 +40,9 @@ class AccountAuthController extends AbstractController
      * @Route("/login",name="login_page")
      * @return Response
      */
-    public function loginAction(Request $request,Security $security): Response
+    public function loginAction(Request $request, Security $security): Response
     {
-        if($security->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)){
+        if ($security->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
             return $this->redirectToRoute('home_page');
         }
         $form = $this->createForm(UserLoginType::class);
@@ -62,11 +62,11 @@ class AccountAuthController extends AbstractController
      * @return Response
      */
     public function registerAction(
-        Request                    $request,
+        Request                     $request,
         UserPasswordHasherInterface $passwordHasher,
-        UploadFileService          $uploadFileService,
-        UserAuthenticatorInterface $userAuthenticator,
-        FormLoginAuthenticator     $formLoginAuthenticator): Response
+        UploadFileService           $uploadFileService,
+        UserAuthenticatorInterface  $userAuthenticator,
+        FormLoginAuthenticator      $formLoginAuthenticator): Response
     {
         $form = $this->createForm(AccountType::class);
         $form->handleRequest($request);
@@ -87,11 +87,10 @@ class AccountAuthController extends AbstractController
                     $formLoginAuthenticator,
                     $request
                 );
-            }
-            else{
+            } else {
                 $errors = $form->getErrors(true);
-                foreach ($errors as $error){
-                    $this->addFlash('error',$error->getMessage());
+                foreach ($errors as $error) {
+                    $this->addFlash('error', $error->getMessage());
                 }
             }
 
@@ -132,5 +131,15 @@ class AccountAuthController extends AbstractController
      * @Route("/logout",name="logout_page")
      */
     public function logout()
-    {}
+    {
+    }
+
+    /**
+     * @Route("/verify_email",name="verify_email_page")
+     */
+    public function VerifyEmail()
+    {
+
+        // TO Do : verify email
+    }
 }

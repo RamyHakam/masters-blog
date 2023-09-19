@@ -13,6 +13,20 @@
         {% include 'sideMenu.html.twig' %}
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
+            {% if  app.user.isVerified() == false %}
+            <div class="alert alert-warning rounded-3 shadow-lg my-3 mx-5">
+                <h4 class="alert-heading">Email Verification Needed!</h4>
+                <p>For full access, please verify your email address.</p>
+                <form action="{{ path('verify_email_page') }}" method="post" class="d-flex justify-content-between">
+                    <input type="hidden" name="user_id" value="{{ app.user.id }}">
+                    <small class="text-muted">Didn't receive the email?</small>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Resend Verification Email</button>
+                </form>
+            </div>
+            {% endif %}
+
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">

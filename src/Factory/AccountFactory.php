@@ -61,6 +61,7 @@ final class AccountFactory extends ModelFactory
             'address' => self::faker()->address(),
             'avatar' => $this->fakeUploadAvatar(),
             'plainPassword' => 'test',
+            'isVerified' => true,
         ];
     }
 

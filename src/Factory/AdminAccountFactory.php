@@ -49,6 +49,7 @@ final class AdminAccountFactory extends ModelFactory
             'apiKey' =>sprintf('%s-%s-%s',self::faker()->lexify(),self::faker()->lexify(),self::faker()->lexify()),
             'roles' => ['ROLE_ADMIN'],
             'plainPassword' => 'test',
+            'isVerified' => true,
         ];
     }
 

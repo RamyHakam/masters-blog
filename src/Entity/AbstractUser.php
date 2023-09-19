@@ -51,6 +51,11 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
      */
     private $lastName;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool  $isVerified = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +149,17 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
     public function setPlainPassword(string $plainPassword): AbstractUser
     {
         $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): AbstractUser
+    {
+        $this->isVerified = $isVerified;
         return $this;
     }
 }
