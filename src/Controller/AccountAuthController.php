@@ -124,7 +124,7 @@ class AccountAuthController extends AbstractController
     }
 
     /**
-     * @Route("/logout",name="logout_page"")
+     * @Route("/logout",name="logout_page")
      */
     public function logout()
     {}

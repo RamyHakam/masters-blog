@@ -1,1 +1,1 @@
-home:      path: /      controller: App\Controller\AccountAuthController::loginAction
+login_page:      path: /      controller: App\Controller\AccountAuthController::loginAction
