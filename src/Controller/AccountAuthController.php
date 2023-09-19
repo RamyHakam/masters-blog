@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 
@@ -38,8 +40,11 @@ class AccountAuthController extends AbstractController
      * @Route("/login",name="login_page")
      * @return Response
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request,Security $security): Response
     {
+        if($security->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)){
+            return $this->redirectToRoute('home_page');
+        }
         $form = $this->createForm(UserLoginType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
