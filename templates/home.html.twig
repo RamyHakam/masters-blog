@@ -7,6 +7,7 @@
 
 
 {% block body %}
+    {{ parent() }}
     <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         {% include 'navbar.html.twig' %}
@@ -18,7 +19,7 @@
             <div class="alert alert-warning rounded-3 shadow-lg my-3 mx-5">
                 <h4 class="alert-heading">Email Verification Needed!</h4>
                 <p>For full access, please verify your email address.</p>
-                <form action="{{ path('verify_email_page') }}" method="post" class="d-flex justify-content-between">
+                <form action="{{ path('send_verification_email') }}" method="post" class="d-flex justify-content-between">
                     <input type="hidden" name="user_id" value="{{ app.user.id }}">
                     <small class="text-muted">Didn't receive the email?</small>
                     <button type="submit" class="btn btn-outline-primary btn-sm">Resend Verification Email</button>

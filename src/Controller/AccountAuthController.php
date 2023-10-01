@@ -8,13 +8,16 @@ use App\Entity\Account;
 use App\Form\ForgetPasswordType;
 use App\Form\AccountType;
 use App\Form\UserLoginType;
+use App\Security\EmailVerifier;
 use App\Service\AccountService;
 use App\Service\PasswordHasherService;
 use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
@@ -29,11 +32,13 @@ class AccountAuthController extends AbstractController
      */
     private $accountService;
     private EntityManagerInterface $entityManager;
+    private EmailVerifier $emailVerifier;
 
-    public function __construct(AccountService $accountService, EntityManagerInterface $entityManager)
+    public function __construct(AccountService $accountService, EntityManagerInterface $entityManager, EmailVerifier $emailVerifier)
     {
         $this->accountService = $accountService;
         $this->entityManager = $entityManager;
+        $this->emailVerifier = $emailVerifier;
     }
 
     /**
@@ -82,6 +87,14 @@ class AccountAuthController extends AbstractController
                 $this->entityManager->persist($userAccountData);
                 $this->entityManager->flush();
 
+               $this->emailVerifier->sendEmailConfirmation('verify_email_page', $userAccountData,
+                        (new TemplatedEmail())
+                            ->from(new Address('  master@masterblog.com  ', 'Master Blog'))
+                   ->to($userAccountData->getEmail())
+                     ->subject('Please Confirm your Email')
+                        ->htmlTemplate('registration/confirmation_email.html.twig'));
+
+                $this->addFlash('success','Verification email has been sent to your email');
                 return $userAuthenticator->authenticateUser(
                     $userAccountData,
                     $formLoginAuthenticator,
@@ -132,6 +145,21 @@ class AccountAuthController extends AbstractController
      */
     public function logout()
     {
+    }
+
+    /**
+     * @Route("/send_verification_email",name="send_verification_email")
+     */
+    public function sendVerificationEmail():  Response
+    {
+        $this->emailVerifier->sendEmailConfirmation('verify_email_page', $this->getUser(),
+            (new TemplatedEmail())
+                ->from(new Address('  master@masterblog.com  ', 'Master Blog'))
+                ->to($this->getUser()->getEmail())
+                ->subject('Please Confirm your Email')
+                ->htmlTemplate('registration/confirmation_email.html.twig'));
+        $this->addFlash('success','Verification email has been sent to your email');
+        return $this->redirectToRoute('home_page');
     }
 
     /**

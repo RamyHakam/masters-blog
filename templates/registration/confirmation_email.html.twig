@@ -1,0 +1,29 @@
+
+{% block subject %}
+    Welcome to Masters Blog - Please Confirm Your Email
+{% endblock %}
+
+{% block body %}
+
+    <div style="background-color: #f7f9fc; padding: 20px; font-family: Arial, sans-serif;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);">
+
+            <h2 style="color: #333333;">Welcome to Masters Blog!</h2>
+            <p>Hello {{ user.email }},</p>
+
+            <p>Thank you for signing up with Masters Blog. We're thrilled to have you on board! Before we get started, please confirm your email address by clicking the button below.</p>
+
+            <a href="{{ signedUrl }}" style="background-color: #3498db; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 4px;">Confirm Email</a>
+
+            <p>If the button above doesn't work, copy and paste the URL below into your browser:</p>
+            <p style="word-wrap: break-word;"><a href="{{ signedUrl }}">{{ signedUrl }}</a></p>
+
+            <p>Once confirmed, you'll be all set to start using CoolService to its fullest!</p>
+
+            <p>Warm regards,</p>
+            <p>The Masters Blog Team</p>
+
+        </div>
+    </div>
+
+{% endblock %}
