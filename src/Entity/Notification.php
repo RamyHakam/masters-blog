@@ -6,39 +6,27 @@ use App\Repository\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-/**
- * @ORM\Entity(repositoryClass=NotificationRepository::class)
- */
+#[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class Notification
 {
     use TimestampableEntity;
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="notifications")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'notifications')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Account $owner;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Account::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Account::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Account $account;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private ?bool $IsSeen;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Post::class)
-     */
+    #[ORM\ManyToOne(targetEntity: Post::class)]
     private ?Post $post;
 
     public function getId(): ?int

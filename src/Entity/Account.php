@@ -7,45 +7,29 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=AccountRepository::class)
- */
+#[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account extends  AbstractUser
 {
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $phone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $title;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $address;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="account")
-     */
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'account')]
     private Collection $posts;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="owner")
-     */
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'owner')]
     private Collection $notifications;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Followers::class, mappedBy="account")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\OneToMany(targetEntity: Followers::class, mappedBy: 'account')]
+    #[ORM\JoinColumn(nullable: false)]
     private Collection $followers;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avatar;
 
 

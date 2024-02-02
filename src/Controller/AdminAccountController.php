@@ -9,17 +9,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin")
- * Class AdminAccountController
  * @package App\Controller
  */
+#[Route(path: '/admin')]
 class AdminAccountController extends AbstractController
 {
 
     /**
-     * @Route("/login",name="admin_login")
      * @return Response
      */
+    #[Route(path: '/login', name: 'admin_login')]
     public function loginAction()
     {
         return $this->render('admin.login.html.twig');

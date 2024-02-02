@@ -38,9 +38,9 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/profile",name="profile_page")
      * @return Response
      */
+    #[Route(path: '/profile', name: 'profile_page')]
     public function getProfile(Request  $request,UploadFileService  $uploadFileService)
     {
         $userAccount  = $this->accountDataService->getUserData();
@@ -61,18 +61,18 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/profile/{id}",name="profile_page_view")
      * @return Response
      */
+    #[Route(path: '/profile/{id}', name: 'profile_page_view')]
     public function viewProfile(Account $account)
     {
         return $this->render('profile_view.html.twig', ['account' => $account]);
     }
 
     /**
-     * @Route("/account_list",name="account_list")
      * @return Response
      */
+    #[Route(path: '/account_list', name: 'account_list')]
     public function listAction()
     {
         return $this->render('account_list.html.twig');

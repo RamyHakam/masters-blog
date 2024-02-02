@@ -6,33 +6,23 @@ use App\Repository\FollowersRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=FollowersRepository::class)
- */
+#[ORM\Entity(repositoryClass: FollowersRepository::class)]
 class Followers
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Account::class, inversedBy="followers")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Account::class, inversedBy: 'followers')]
+    #[ORM\JoinColumn(nullable: false)]
     private $account;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Account::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: Account::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $followedBy;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'date')]
     private  DateTime  $followed_since;
 
     public function __construct()

@@ -44,9 +44,9 @@ class AccountAuthController extends AbstractController
     }
 
     /**
-     * @Route("/login",name="login_page")
      * @return Response
      */
+    #[Route(path: '/login', name: 'login_page')]
     public function loginAction(Request $request, Security $security): Response
     {
         if ($security->isGranted(AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED)) {
@@ -65,9 +65,9 @@ class AccountAuthController extends AbstractController
     }
 
     /**
-     * @Route("/register",name="register_page")
      * @return Response
      */
+    #[Route(path: '/register', name: 'register_page')]
     public function registerAction(
         Request                     $request,
         UserPasswordHasherInterface $passwordHasher,
@@ -116,9 +116,9 @@ class AccountAuthController extends AbstractController
     }
 
     /**
-     * @Route("/forget_password",name="forget_password_page")
      * @return Response
      */
+    #[Route(path: '/forget_password', name: 'forget_password_page')]
     public function forgetPasswordAction(Request $request)
     {
         $form = $this->createForm(ForgetPasswordType::class);
@@ -142,16 +142,12 @@ class AccountAuthController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/logout",name="logout_page")
-     */
+    #[Route(path: '/logout', name: 'logout_page')]
     public function logout()
     {
     }
 
-    /**
-     * @Route("/send_verification_email",name="send_verification_email")
-     */
+    #[Route(path: '/send_verification_email', name: 'send_verification_email')]
     public function sendVerificationEmail():  Response
     {
         $this->emailVerifier->sendEmailConfirmation('verify_email_page', $this->getUser(),
@@ -164,9 +160,7 @@ class AccountAuthController extends AbstractController
         return $this->redirectToRoute('home_page');
     }
 
-    /**
-     * @Route("/verify_email",name="verify_email_page")
-     */
+    #[Route(path: '/verify_email', name: 'verify_email_page')]
     public function VerifyEmail(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

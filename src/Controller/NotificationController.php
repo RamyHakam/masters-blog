@@ -13,9 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class NotificationController extends AbstractController
 {
     /**
-     * @Route("/notification",name="notification_page")
      * @return Response
      */
+    #[Route(path: '/notification', name: 'notification_page')]
     public function listAction(NotificationService  $notificationService,AccountDataService  $accountDataService)
     {
         $userAccount  = $accountDataService->getUserData();

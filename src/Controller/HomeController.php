@@ -29,9 +29,9 @@ class HomeController extends  AbstractController
     }
 
     /**
-     * @Route("/home", name="home_page")
      * @return Response
      */
+    #[Route(path: '/home', name: 'home_page')]
     public function Home(Request  $request,UploadFileService  $uploadFileService)
     {
         $account = $this->accountDataService->getUserData();

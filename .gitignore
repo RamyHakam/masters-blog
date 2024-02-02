@@ -28,3 +28,7 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 public/uploads/
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
