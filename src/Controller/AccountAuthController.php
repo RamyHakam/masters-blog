@@ -15,6 +15,7 @@ use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -24,6 +25,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class AccountAuthController extends AbstractController
 {
@@ -165,9 +167,21 @@ class AccountAuthController extends AbstractController
     /**
      * @Route("/verify_email",name="verify_email_page")
      */
-    public function VerifyEmail()
+    public function VerifyEmail(Request $request): RedirectResponse
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        // TO Do : verify email
+        // validate email confirmation link, sets User::isVerified=true and persists
+        try {
+            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+        } catch (VerifyEmailExceptionInterface $exception) {
+            $this->addFlash('verify_email_error', $exception->getReason());
+
+            return $this->redirectToRoute('register_page');
+        }
+
+        $this->addFlash('success', 'Your email address has been verified.');
+
+        return $this->redirectToRoute('home_page');
     }
 }
