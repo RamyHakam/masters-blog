@@ -1,9 +1,25 @@
-<h1>Hi!</h1>
+{% extends 'base.html.twig' %}
 
-<p>To reset your password, please visit the following link</p>
+{% block title %}
+    {{ parent() }} - Reset Your Password
+{% endblock %}
 
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
-
-<p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
-
-<p>Cheers!</p>
+{% block body %}
+    {{ parent() }}
+    <body style="background-color: #f4f4f4; font-family: Arial, sans-serif; color: #444; line-height: 1.6;">
+    <div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="home.html" style="font-size: 32px; text-decoration: none; color: #007bff;"><b>Masters</b>Blog</a>
+        </div>
+        <h1 style="font-size: 24px; color: #333;">Password Reset Request</h1>
+        <p>Hello,</p>
+        <p>You requested a password reset for your account. Please click the button below to set a new password.</p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{{ url('app_reset_password', {token: resetToken.token}) }}" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Reset Password</a>
+        </div>
+        <p>If you did not request a password reset, please ignore this email or contact support if you have concerns.</p>
+        <p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. Please reset your password before it expires to ensure access to your account.</p>
+        <p>Best regards,<br/>MastersBlog Team</p>
+    </div>
+    </body>
+{% endblock %}
