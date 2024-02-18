@@ -34,7 +34,7 @@ class HomeController extends  AbstractController
     #[Route(path: '/home', name: 'home_page')]
     public function Home(Request  $request,UploadFileService  $uploadFileService)
     {
-        $account = $this->accountDataService->getUserData();
+        $account = $this->getUser();
         $postForm = $this->createForm(PostType::class,null,['action' => '#']);
         $postForm->handleRequest($request);
         if ($postForm->isSubmitted() && $postForm->isValid()) {
