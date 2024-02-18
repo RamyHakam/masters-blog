@@ -48,7 +48,9 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                  {{ form_rest(form) }}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {{ form_rest(form) }}
                 {{ form_end(form) }}
                 <p class="mb-1">
                     <a href="{{ path('forgot_password_request') }}">I forgot my password</a>

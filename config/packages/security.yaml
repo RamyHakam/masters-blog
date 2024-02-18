@@ -26,6 +26,7 @@ security:
                 default_target_path: home_page
                 username_parameter: user_login[email]
                 password_parameter: user_login[password]
+                enable_csrf: true
             logout: true
 
             # activate different ways to authenticate
