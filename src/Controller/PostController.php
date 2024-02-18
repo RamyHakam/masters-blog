@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,21 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/post')]
 class PostController extends AbstractController
 {
-    /**
-     * @return Response
-     */
+
     #[Route(path: '/list-deleted', name: 'list_delete_posts_request')]
-    public function listDeleteRequestAction()
+    #[Security('is_granted("IS_AUTHENTICATED")')]
+    public function listDeleteRequestAction(): Response
     {
         return $this->render('delete_request.html.twig');
     }
 
 
-    /**
-     * @return Response
-     */
     #[Route(path: '/post/{id}', name: 'single_post', methods: ['GET'])]
-    public function getPostAction(int $id)
+    #[Security('is_granted("IS_AUTHENTICATED")')]
+    public function getPostAction(int $id): Response
     {
         return $this->render('single_post.html.twig',['id' => $id]);
     }

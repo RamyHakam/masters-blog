@@ -10,6 +10,7 @@ use App\Service\AccountDataService;
 use App\Service\FollowService;
 use App\Service\PostService;
 use App\Service\UploadFileService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use \Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,13 +38,11 @@ class AccountController extends AbstractController
         $this->followService = $followService;
     }
 
-    /**
-     * @return Response
-     */
     #[Route(path: '/profile', name: 'profile_page')]
-    public function getProfile(Request  $request,UploadFileService  $uploadFileService)
+    #[Security('is_granted("IS_AUTHENTICATED")')]
+    public function getProfile(Request  $request,UploadFileService  $uploadFileService): Response
     {
-        $userAccount  = $this->accountDataService->getUserData();
+        $userAccount  = $this->getUser();
         $form = $this->createForm(AccountType::class,$userAccount);
         $form->remove('plainPassword');
         $form->handleRequest($request);
@@ -60,20 +59,16 @@ class AccountController extends AbstractController
         return $this->render('profile.html.twig',['account'=>$userAccount,'form'=>$form->createView()]);
     }
 
-    /**
-     * @return Response
-     */
     #[Route(path: '/profile/{id}', name: 'profile_page_view')]
-    public function viewProfile(Account $account)
+    #[Security('is_granted("IS_AUTHENTICATED")')]
+    public function viewProfile(Account $account): Response
     {
         return $this->render('profile_view.html.twig', ['account' => $account]);
     }
 
-    /**
-     * @return Response
-     */
     #[Route(path: '/account_list', name: 'account_list')]
-    public function listAction()
+    #[Security('is_granted("IS_AUTHENTICATED")')]
+    public function listAction(): Response
     {
         return $this->render('account_list.html.twig');
     }

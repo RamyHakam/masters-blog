@@ -9,6 +9,7 @@ use App\Form\PostType;
 use App\Service\AccountDataService;
 use App\Service\PostService;
 use App\Service\UploadFileService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,19 +21,18 @@ class HomeController extends  AbstractController
      * @var PostService
      */
     private PostService  $postService;
-    private AccountDataService $accountDataService;
 
-    public function __construct(PostService $postService, AccountDataService  $accountDataService)
+    public function __construct(PostService $postService)
     {
         $this->postService = $postService;
-        $this->accountDataService = $accountDataService;
     }
 
     /**
      * @return Response
      */
     #[Route(path: '/home', name: 'home_page')]
-    public function Home(Request  $request,UploadFileService  $uploadFileService)
+    #[Security('is_granted("IS_AUTHENTICATED")')]
+    public function Home(Request  $request,UploadFileService  $uploadFileService): Response
     {
         $account = $this->getUser();
         $postForm = $this->createForm(PostType::class,null,['action' => '#']);
