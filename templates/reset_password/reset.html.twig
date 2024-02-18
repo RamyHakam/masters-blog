@@ -1,12 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}
+    {{ parent() }} - Reset Password
+{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+    {{ parent() }}
+    <style>
+        /* Add custom styles here or in your external stylesheet */
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Use full height to center vertically */
+        }
+        .login-box {
+            margin: auto;
+            padding: 20px;
+            width: 400px; /* Adjust width as needed */
+        }
+        .login-card-body {
+            padding: 20px;
+        }
+        .input-group-text {
+            min-width: 40px; /* Ensure icons are not squished */
+        }
+        .btn-block {
+            margin-top: 10px; /* Provide space above the button */
+        }
+        .login-logo a,
+        .login-box-msg,
+        .btn-block,
+        .login-box a {
+            margin-bottom: 15px; /* Add space below elements */
+        }
+    </style>
+    <body class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="home.html"><b>Masters</b>Blog</a>
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Enter your new password below.</p>
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+                {{ form_start(resetForm, {'attr': {'style': 'width: 100%;'}}) }}
+                <div >
+                    {{ form_row(resetForm.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'New Password'} }) }}
+                </div>
+                <div >
+                    {{ form_row(resetForm.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repeat Password'} }) }}
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+                    </div>
+                </div>
+                {{ form_rest(resetForm) }}
+                {{ form_end(resetForm) }}
+
+                <p class="mt-3 mb-1">
+                    <a href="{{ path('login_page') }}">Login</a>
+                </p>
+                <p class="mb-0">
+                    <a href="{{ path('register_page') }}" class="text-center">Register a new membership</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    </body>
 {% endblock %}
