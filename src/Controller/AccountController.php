@@ -65,11 +65,4 @@ class AccountController extends AbstractController
     {
         return $this->render('profile_view.html.twig', ['account' => $account]);
     }
-
-    #[Route(path: '/account_list', name: 'account_list')]
-    #[Security('is_granted("IS_AUTHENTICATED")')]
-    public function listAction(): Response
-    {
-        return $this->render('account_list.html.twig');
-    }
 }

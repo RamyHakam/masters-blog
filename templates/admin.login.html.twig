@@ -10,39 +10,54 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ path('list_delete_posts_request') }}" class="h1"><b>Masters</b>Blog Admins</a>
+                <a href="{{ path('home_page') }}" class="h1"><b>Masters</b>Blog</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Sign in to start your session As Admin</p>
 
-                <form action="{{ path('list_delete_posts_request') }}" method="post">
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
+                {{ form_start(form) }}
+                <div class="input-group mb-3">
+                    {{ form_widget(form.email,{'attr':{'class':'form-control','placeholder':'Email'}}) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
+                </div>
+                <div class="input-group mb-3">
+                    {{ form_widget(form.password,{'attr':{'class':'form-control','placeholder':'Password'}}) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <!-- /.col -->
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">
+                                Remember Me
+                            </label>
                         </div>
-                        <!-- /.col -->
                     </div>
-                </form>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+                <p class="mb-1">
+                    <a href="{{ path('forgot_password_request') }}">I forgot my password</a>
+                </p>
             </div>
             <!-- /.card-body -->
         </div>
+
         <!-- /.card -->
     </div>
     <!-- /.login-box -->
