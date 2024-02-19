@@ -22,10 +22,6 @@ class AdminAccountAuthController extends AbstractController
             return $this->redirectToRoute('account_list');
         }
         $form = $this->createForm(UserLoginType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('account_list');
-        }
         return $this->render('admin.login.html.twig', [
             'form' => $form->createView()
         ]);

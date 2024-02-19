@@ -53,12 +53,6 @@ class AccountAuthController extends AbstractController
             return $this->redirectToRoute('home_page');
         }
         $form = $this->createForm(UserLoginType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            // log the user to db
-            return $this->redirectToRoute('home_page');
-        }
         return $this->render('login.html.twig', [
             'form' => $form->createView()
         ]);
