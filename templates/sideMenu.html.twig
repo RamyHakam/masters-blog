@@ -16,14 +16,14 @@
                     <img alt="User Image" class="img-circle elevation-2" src="{{ asset(account.getAvatarPath()) }}">
                 </div>
                 <div class="info">
-                    <a class="d-block" href="{{ path('profile_page') }}">{{ account.getFullName}} </a>
+                    <a class="d-block" href="{{ path('profile_page') }}">{{ account.getFullName }} </a>
                 </div>
             </div>
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-accordion="false" data-widget="treeview" role="menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('home_page') }}">
+                        <a class="nav-link {{ app.request.attributes.get('_route') == 'home_page' ? 'active' : '' }}" href="{{ path('home_page') }}">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Home
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('notification_page') }}">
+                        <a class="nav-link {{ app.request.attributes.get('_route') == 'notification_page' ? 'active' : '' }}" href="{{ path('notification_page') }}">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Notification
@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('logout_page') }}">
+                        <a class="nav-link {{ app.request.attributes.get('_route') == 'logout_page' ? 'active' : '' }}" href="{{ path('logout_page') }}">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                                 Logout

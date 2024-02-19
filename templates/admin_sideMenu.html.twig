@@ -1,11 +1,9 @@
 {% block sideMenu %}
     <!-- Main Sidebar Container -->
-
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="{{ path('list_delete_posts_request') }}" class="brand-link">
-            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
+            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Masters Blog</span>
         </a>
 
@@ -14,8 +12,8 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item ">
-                        <a href="{{ path('list_delete_posts_request') }}" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="{{ path('list_delete_posts_request') }}" class="nav-link {{ app.request.attributes.get('_route') == 'list_delete_posts_request' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Delete Requests
@@ -24,7 +22,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('account_list') }}" class="nav-link">
+                        <a href="{{ path('account_list') }}" class="nav-link {{ app.request.attributes.get('_route') == 'account_list' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-copy"></i>
                             <p>
                                 Accounts List
@@ -32,7 +30,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ path('logout_page') }}" class="nav-link {{ app.request.attributes.get('_route') == 'logout' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                                 Logout
