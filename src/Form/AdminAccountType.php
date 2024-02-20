@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Account;
+use App\Entity\AdminAccount;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -29,9 +30,6 @@ class AdminAccountType extends AbstractType
                 ])
             ->add('firstName')
             ->add('lastName')
-            ->add('phone')
-            ->add('title')
-            ->add('address')
             ->add('userPhoto', FileType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -41,7 +39,7 @@ class AdminAccountType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Account::class,
+            'data_class' => AdminAccount::class,
         ]);
     }
 }

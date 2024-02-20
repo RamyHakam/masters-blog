@@ -40,6 +40,9 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private bool  $isVerified = false;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avatar;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -101,6 +104,12 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    public function addRole(string $role): self
+    {
+        $this->roles[] = $role;
+        return $this;
+    }
+
     public function getSalt()
     {
     }
@@ -144,6 +153,17 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): AbstractUser
     {
         $this->isVerified = $isVerified;
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+    public function setAvatar(string $avatar): self
+    {
+        $this->avatar = $avatar;
+
         return $this;
     }
 }

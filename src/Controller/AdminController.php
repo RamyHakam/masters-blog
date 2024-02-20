@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Security('is_granted("ROLE_ADMIN")')]
 class AdminController extends AbstractController
 {
+    const adminRole = 'ROLE_ADMIN';
     #[Route(path: '/account_list', name: 'account_list')]
     public function listAction(): Response
     {
@@ -51,13 +52,16 @@ class AdminController extends AbstractController
                 $plainPassword = $form->get('plainPassword')->getData();
                 /** @var AdminAccount $adminAccount */
                 $adminAccount = $form->getData();
-                $adminAccount->setPassword($passwordHasher->hashPassword($adminPhoto, $plainPassword));
-                //          $adminAccount->setAvatar($adminPhotoName);
+                $adminAccount->setPassword($passwordHasher->hashPassword($adminAccount, $plainPassword));
+                $adminAccount->setAvatar($adminPhotoName);
+                // add the admin role
+                $adminAccount->addRole(self::adminRole);
+                $adminAccount->setIsVerified(true);
                 $entityManager->persist($adminAccount);
                 $entityManager->flush();
                 // To do: Send reset password  email to the new admin
                 $this->addFlash('success', ' new Admin added successfully');
-                return $this->redirectToRoute('account_list');
+                return $this->redirectToRoute('add_admin');
             } else {
                 $errors = $form->getErrors(true);
                 foreach ($errors as $error) {
