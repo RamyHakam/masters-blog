@@ -15,15 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/post')]
 class PostController extends AbstractController
 {
-
-    #[Route(path: '/list-deleted', name: 'list_delete_posts_request')]
-    #[Security('is_granted("IS_AUTHENTICATED")')]
-    public function listDeleteRequestAction(): Response
-    {
-        return $this->render('delete_request.html.twig');
-    }
-
-
     #[Route(path: '/post/{id}', name: 'single_post', methods: ['GET'])]
     #[Security('is_granted("IS_AUTHENTICATED")')]
     public function getPostAction(int $id): Response

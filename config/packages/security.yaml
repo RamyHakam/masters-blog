@@ -27,6 +27,7 @@ security:
                 default_target_path: account_list
                 username_parameter: user_login[email]
                 password_parameter: user_login[password]
+                success_handler: App\Security\AdminLoginSuccessHandler
                 enable_csrf: true
             logout: true
         main:
