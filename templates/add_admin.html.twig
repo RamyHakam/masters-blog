@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ parent() }} - Account List
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+        </nav>
+        {% include 'admin_sideMenu.html.twig' %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+            </section>
+            <section class="content">
+                <div class="register-box"  style="width: 80%; margin: 0 auto;">
+                    <div class="card card-outline card-primary">
+                        <div class="card-header text-center">
+                            <a href="{{ path('home_page') }}" class="h1"><b>Masters</b>Blog</a>
+                        </div>
+                        <div class="card-body">
+                            <p class="login-box-msg">Add  new  Admin </p>
+
+                            {{ form_start(form) }}
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.firstName, { 'attr': {'class': 'form-control', 'placeholder': 'First Name'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.lastName, { 'attr': {'class': 'form-control', 'placeholder': 'Last Name'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.phone, { 'attr': {'class': 'form-control', 'placeholder': 'Phone'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Title'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-briefcase"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.address, { 'attr': {'class': 'form-control', 'placeholder': 'Your Address'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-address-card"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control','placeholder':'Your Password'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control','placeholder':'Retype Password'} }) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        {{ form_widget(form.userPhoto, { 'attr': {'class': 'custom-file-input', 'placeholder': 'Your Image'} }) }}
+                                        {{ form_label(form.userPhoto, 'Your Image', { 'label_attr': {'class': 'custom-file-label'} }) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
+                            <a href="{{ path('login_page') }}" class="text-center">I already have a membership</a>
+                        </div>
+                        <!-- /.form-box -->
+                    </div><!-- /.card -->
+                </div>
+            </section>
+        </div>
+    </div>
+    </body>
+{% endblock %}

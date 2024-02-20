@@ -29,6 +29,16 @@
                             </p>
                         </a>
                     </li>
+                    {% if  is_granted('ROLE_SUPER_ADMIN') %}
+                    <li class="nav-item">
+                        <a href="{{ path('add_admin') }}" class="nav-link {{ app.request.attributes.get('_route') == 'add_admin' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Add Admin
+                            </p>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a href="{{ path('logout_page') }}" class="nav-link {{ app.request.attributes.get('_route') == 'logout' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-table"></i>
