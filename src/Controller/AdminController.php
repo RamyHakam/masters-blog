@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Entity\AdminAccount;
 use App\Form\AccountType;
 use App\Form\AdminAccountType;
+use App\Service\ResetPasswordService;
 use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -41,6 +42,7 @@ class AdminController extends AbstractController
         UserPasswordHasherInterface $passwordHasher,
         UploadFileService           $uploadFileService,
         EntityManagerInterface      $entityManager,
+        ResetPasswordService       $resetPasswordService
     ): Response
     {
         $form = $this->createForm(AdminAccountType::class);
@@ -59,7 +61,7 @@ class AdminController extends AbstractController
                 $adminAccount->setIsVerified(true);
                 $entityManager->persist($adminAccount);
                 $entityManager->flush();
-                // To do: Send reset password  email to the new admin
+                $resetPasswordService->sendResetPasswordEmail($adminAccount);
                 $this->addFlash('success', ' new Admin added successfully');
                 return $this->redirectToRoute('add_admin');
             } else {

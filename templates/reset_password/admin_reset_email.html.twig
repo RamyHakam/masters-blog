@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Welcome to Your Admin Dashboard
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <body style="background-color: #f7f7f7; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #555; line-height: 1.6;">
+    <div style="max-width: 600px; margin: 40px auto; padding: 20px; background-color: #ffffff; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <h1 style="font-size: 28px; color: #333; text-align: center;">Welcome Aboard!</h1>
+        <p style="font-size: 16px; text-align: center;">You're one step away from accessing your admin dashboard.</p>
+        <hr style="margin: 20px 0;">
+        <p>Hello New Admin,</p>
+        <p>The super admin has prepared your account. Please click the button below to set your password and activate your account.</p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{{ url('admin_reset_password', {token: resetToken.token}) }}" style="background-color: #4CAF50; color: #ffffff; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Activate Account</a>
+        </div>
+        <p>If you did not expect to receive this email or believe it's an error, please reach out to our support team.</p>
+        <p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}. Don't miss out on setting your password!</p>
+        <p style="text-align: center; font-style: italic;">Thank you for joining us,<br/><span style="font-weight: bold; color: #007bff;">The MastersBlog Super Admin Team</span></p>
+    </div>
+    </body>
+{% endblock %}
+
