@@ -73,4 +73,8 @@ class AdminAccountAuthController extends AbstractController
                 'resetForm' => $form->createView(),
             ]);
         }
+        #[Route(path: '/logout', name: 'admin_logout')]
+        public function logoutAction(): void
+        {
+        }
 }

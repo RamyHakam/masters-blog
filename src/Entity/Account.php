@@ -90,6 +90,14 @@ class Account extends  AbstractUser
         return $this;
     }
 
+    public function getRoles(): array
+    {
+        $roles = parent::getRoles();
+        $roles[] = 'ROLE_MEMBER';
+        return array_unique($roles);
+    }
+
+
     public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {

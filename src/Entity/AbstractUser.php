@@ -110,6 +110,12 @@ class AbstractUser implements UserInterface , PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function setRoles(array $roles): AbstractUser
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
     public function getSalt()
     {
     }
