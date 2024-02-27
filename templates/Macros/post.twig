@@ -89,11 +89,13 @@
     <script>
         function reportPost(postId) {
             console.log('Reporting post with ID:', postId);
+            var reportToken = '{{ csrf_token("report_token") }}';
             $.ajax({
                 url: '/report_post',
                 type: 'POST',
                 data: {
                     'postId': postId,
+                    'report_token': reportToken
                 },
                 success: function (response) {
                     console.log('Post reported successfully:', response);

@@ -31,6 +31,9 @@ class Post
     #[ORM\Column(type: 'integer')]
     private  int $likes = 0;
 
+    #[ORM\Column(type: 'boolean')]
+    private  bool $reported = false;
+
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post')]
     private Collection $comments;
 
@@ -125,5 +128,16 @@ class Post
     public  function  getPhotoPath() :string
     {
         return 'uploads/'.UploadFileService::Directories[UploadFileService::PostType].'/' . $this->getPhoto();
+    }
+
+    public function isReported(): bool
+    {
+        return $this->reported;
+    }
+
+    public function setReported(bool $reported): Post
+    {
+        $this->reported = $reported;
+        return $this;
     }
 }
