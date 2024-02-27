@@ -1,6 +1,12 @@
 {% macro post(post,account) %}
     {% import 'Macros/comment.twig' as comment %}
-    <div class="post" style="width: 100%">
+    <style>
+        .reported {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+            opacity: 0.5;
+        }
+    </style>
+    <div class="post {{ post.reported ? 'reported' : '' }}" style="width: 100%">
         <div class="row">
             <div class="col-md-12">
                 <!-- Box Comment -->
@@ -22,7 +28,7 @@
                         <div class="col-12">
                             <p>{{ post.text }}</p>
                             {% if post.photo %}
-                                <img class="img-fluid pad" src="{{ asset(post.getPhotoPath()) }}" alt="Photo"
+                                <img class="img-fluid pad {{ post.reported ? 'reported' : '' }}" src="{{ asset(post.getPhotoPath()) }}" alt="Photo"
                                      style="margin-bottom: 1rem; margin-right: 2rem">
                             {% endif %}
                         </div>
@@ -30,9 +36,11 @@
                             <button class="btn btn-default btn-sm" type="button"><i class="far fa-thumbs-up"></i> Like
                             </button>
                             {% if is_granted('ROLE_REPORTER') %}
-                            <button class="btn btn-warning btn-sm report-button" type="button" data-toggle="modal"
-                                    data-target="#reportModal_{{ post.id }}"><i class="fas fa-flag"></i> Report
-                            </button>
+                                <button class="btn btn-warning btn-sm report-button" type="button"
+                                        data-toggle="modal" data-target="#reportModal_{{ post.id }}"
+                                        {{ post.reported ? 'disabled' : '' }}>
+                                    <i class="fas fa-flag"></i> {{ post.reported ? 'Reported' : 'Report' }}
+                                </button>
                             {% endif %}
                             <span class="float-right text-muted px-2"
                                   id="comments-count_{{ post.id }}"> {{ post.comments| length }} comments</span>
@@ -46,8 +54,9 @@
                         {% endfor %}
                     </div>
                     <!-- /.card-footer -->
+                    {% if  not post.reported %}
                     <div class="card-footer">
-                        <form action="{{ path('add_comment',{'id':post.id}) }}" method="post" class="comment-form"
+                        <form action="{{ path('add_comment', {'id':post.id}) }}" method="post" class="comment-form"
                               data-post-id="{{ post.id }}">
                             <img alt="Alt Text" class="img-fluid img-circle img-sm"
                                  src="{{ asset(account.getAvatarPath()) }}">
@@ -58,6 +67,7 @@
                             <input type="hidden" name="comment_token" value="{{ csrf_token("comment_token") }}">
                         </form>
                     </div>
+                    {% endif %}
                     <!-- /.card-footer -->
                 </div>
                 <!-- /.card -->
