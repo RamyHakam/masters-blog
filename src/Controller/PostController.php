@@ -40,6 +40,7 @@ class PostController extends AbstractController
         $id = $request->request->get('postId');
         try {
             $post = $this->postRepository->find($id);
+            $this->denyAccessUnlessGranted('POST_REPORT', $post);
             $post->setReported(true);
             $reportRequest = new ReportRequest();
             $reportRequest->setAccount($this->getUser());

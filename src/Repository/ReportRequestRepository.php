@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Account;
 use App\Entity\ReportRequest;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,28 +23,17 @@ class ReportRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, ReportRequest::class);
     }
 
-//    /**
-//     * @return ReportRequest[] Returns an array of ReportRequest objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ReportRequest
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function countReportRequestFromAccountIn24Hours( Account  $user): int
+    {
+        $date = new DateTime();
+        $date->modify('-24 hours');
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->where('r.account = :account')
+            ->andWhere('r.createdAt > :date')
+            ->setParameter('account', $user)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

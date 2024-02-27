@@ -38,7 +38,7 @@
                             {% if is_granted('ROLE_REPORTER') %}
                                 <button class="btn btn-warning btn-sm report-button" type="button"
                                         data-toggle="modal" data-target="#reportModal_{{ post.id }}"
-                                        {{ post.reported ? 'disabled' : '' }}>
+                                        {{ post.reported  or not is_granted('POST_REPORT',post)? 'disabled' : '' }}>
                                     <i class="fas fa-flag"></i> {{ post.reported ? 'Reported' : 'Report' }}
                                 </button>
                             {% endif %}
