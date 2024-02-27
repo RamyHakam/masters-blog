@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\ReportRequest;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @package App\Controller
@@ -48,7 +50,17 @@ class PostController extends AbstractController
             $this->entityManager->persist($reportRequest);
             $this->entityManager->persist($post);
             $this->entityManager->flush();
-        } catch (\Exception $e) {
+        }
+        catch(AccessDeniedException $e) {
+            $this->logger->error('Access denied reporting post: ' . $e->getMessage());
+            return new JsonResponse(['status' => ' Access Denied'], Response::HTTP_FORBIDDEN);
+        }
+        catch (Exception $e) {
+            $this->logger->error('Error reporting post: ' . $e->getMessage());
+            return new JsonResponse(['status' => 'error'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        catch (Exception $e) {
             $this->logger->error('Error reporting post: ' . $e->getMessage());
             return new JsonResponse(['status' => 'error']);
         }

@@ -96,9 +96,30 @@
             </div>
         </div>
     </div>
+    <!-- Max Report Requests Modal -->
+    <div class="modal fade" id="maxReportRequestsModal" tabindex="-1" role="dialog"
+         aria-labelledby="maxReportRequestsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="maxReportRequestsModalLabel">Max Report Requests Reached</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    You have reached the maximum number of report requests in 24 hours.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function reportPost(postId) {
             console.log('Reporting post with ID:', postId);
+            $('#reportModal_' + postId).modal('hide');
             var reportToken = '{{ csrf_token("report_token") }}';
             $.ajax({
                 url: '/report_post',
@@ -110,7 +131,6 @@
                 success: function (response) {
                     console.log('Post reported successfully:', response);
                     // Close the modal on success
-                    $('#reportModal_' + postId).modal('hide');
                     // Find and disable the report button for this post
                     $("button.report-button[data-target='#reportModal_" + postId + "']")
                         .prop('disabled', true)
@@ -118,6 +138,12 @@
                         .addClass('disabled');
                 },
                 error: function (xhr, status, error) {
+                    if (xhr.status === 403) {
+                        // Display the modal for max report requests reached
+                        $('#maxReportRequestsModal').modal('show');
+                        $('button.report-button').prop('disabled', true);
+
+                    }
                     console.error('Error reporting post:', error);
                 }
             });
