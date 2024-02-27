@@ -29,11 +29,15 @@ class Account extends  AbstractUser
     #[ORM\JoinColumn(nullable: false)]
     private Collection $followers;
 
+    #[ORM\OneToMany(mappedBy: 'accout', targetEntity: ReportRequest::class)]
+    private Collection $reportRequests;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->followers = new ArrayCollection();
+        $this->reportRequests = new ArrayCollection();
     }
 
     public function getPhone(): ?string
@@ -176,5 +180,35 @@ class Account extends  AbstractUser
     public  function  getAvatarPath() :string
     {
         return 'uploads/avatars/' . $this->getAvatar()?? 'uploads/avatars/default.webp';
+    }
+
+    /**
+     * @return Collection<int, ReportRequest>
+     */
+    public function getReportRequests(): Collection
+    {
+        return $this->reportRequests;
+    }
+
+    public function addReportRequest(ReportRequest $reportRequest): static
+    {
+        if (!$this->reportRequests->contains($reportRequest)) {
+            $this->reportRequests->add($reportRequest);
+            $reportRequest->setAccout($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportRequest(ReportRequest $reportRequest): static
+    {
+        if ($this->reportRequests->removeElement($reportRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($reportRequest->getAccout() === $this) {
+                $reportRequest->setAccout(null);
+            }
+        }
+
+        return $this;
     }
 }

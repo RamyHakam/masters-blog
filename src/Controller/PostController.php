@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\ReportRequest;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -40,6 +41,10 @@ class PostController extends AbstractController
         try {
             $post = $this->postRepository->find($id);
             $post->setReported(true);
+            $reportRequest = new ReportRequest();
+            $reportRequest->setAccount($this->getUser());
+            $reportRequest->setPost($post);
+            $this->entityManager->persist($reportRequest);
             $this->entityManager->persist($post);
             $this->entityManager->flush();
         } catch (\Exception $e) {
