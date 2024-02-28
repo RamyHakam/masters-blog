@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Post;
 use App\Entity\ReportRequest;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,5 +66,14 @@ class PostController extends AbstractController
             return new JsonResponse(['status' => 'error']);
         }
         return new JsonResponse(['status' => 'reported']);
+    }
+
+    #[Route(path: '/post/{id}', name: 'delete_post', methods: ['DELETE'])]
+    public function deletePostAction( Post $post): Response
+    {
+        $this->denyAccessUnlessGranted('DELETE', $post);
+        $this->entityManager->remove($post);
+        $this->entityManager->flush();
+        return new JsonResponse(['status' => 'deleted']);
     }
 }

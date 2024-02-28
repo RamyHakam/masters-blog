@@ -51,171 +51,41 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for request in report_requests %}
                             <tr>
                                 <td>
-                                    #
+                                    {{ loop.index }}
                                 </td>
                                 <td>
                                     <a>
-                                        Ramy Hakam
+                                           {{ request.post.account.getFullName() }}
                                     </a>
                                     <br>
                                 </td>
                                 <td>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="{{ asset('dist/img/avatar.png') }}">
+                                            <img alt="Avatar" class="table-avatar" src="{{ asset(request.account.getAvatarPath())}}">
                                         </li>
                                     </ul>
                                 </td>
                                 <td class="project-state">
-                                    <span >26.2.2020</span>
+                                    <span >{{ request.createdAt | date('d/m/y H:i:') }}</span>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="{{ path('single_post',{id:1}) }}" target="_blank">
+                                    <a class="btn btn-primary btn-sm" href="{{ path('single_post',{id:request.post.id}) }}" target="_blank">
                                         <i class="fas fa-folder">
                                         </i>
                                         View
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
+                                    <a class="btn btn-danger btn-sm" href="{{ path('delete_post',{id:request.post.id}) }}">
                                         <i class="fas fa-trash">
                                         </i>
                                         Delete
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    #
-                                </td>
-                                <td>
-                                    <a>
-                                        Ramy Hakam
-                                    </a>
-                                    <br>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="{{ asset('dist/img/avatar.png') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project-state">
-                                    <span>20.8.2020</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #
-                                </td>
-                                <td>
-                                    <a>
-                                        Ramy Hakam
-                                    </a>
-                                    <br>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="{{ asset('dist/img/avatar.png') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project-state">
-                                    <span>13.01.2019</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #
-                                </td>
-                                <td>
-                                    <a>
-                                        Ramy Hakam
-                                    </a>
-                                    <br>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="{{ asset('dist/img/avatar.png') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project-state">
-                                    <span >2.10.2021</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    #
-                                </td>
-                                <td>
-                                    <a>
-                                        Ramy Hakam
-                                    </a>
-                                    <br>
-                                </td>
-                                <td>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <img alt="Avatar" class="table-avatar" src="{{ asset('dist/img/avatar.png') }}">
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td class="project-state">
-                                    <span>18.10.2020</span>
-                                </td>
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

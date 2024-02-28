@@ -6,6 +6,7 @@ use App\Entity\Account;
 use App\Entity\AdminAccount;
 use App\Form\AccountType;
 use App\Form\AdminAccountType;
+use App\Repository\ReportRequestRepository;
 use App\Service\ResetPasswordService;
 use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,9 +31,11 @@ class AdminController extends AbstractController
     }
 
     #[Route(path: '/list-deleted', name: 'list_delete_posts_request')]
-    public function listDeleteRequestAction(): Response
+    public function listDeleteRequestAction( ReportRequestRepository $reportRequestRepository): Response
     {
-        return $this->render('delete_request.html.twig');
+        return $this->render('delete_request.html.twig', [
+            'report_requests' => $reportRequestRepository->findAll()
+        ]);
     }
 
     #[Route(path: '/add-admin', name: 'add_admin')]
